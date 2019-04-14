@@ -46,6 +46,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cadastros\Medico.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cadastros\Medico.Designer.cs">
+      <DependentUpon>Medico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Principais\Agendamento.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Principais\Agendamento.Designer.cs">
+      <DependentUpon>Agendamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cadastros\Animal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cadastros\Animal.Designer.cs">
+      <DependentUpon>Animal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cadastros\Dono.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cadastros\Dono.Designer.cs">
+      <DependentUpon>Dono.cs</DependentUpon>
+    </Compile>
     <Compile Include="Estrutura.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,13 +82,40 @@
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cadastros\Funcionario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cadastros\Funcionario.Designer.cs">
+      <DependentUpon>Funcionario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Principais\Registros.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Principais\Registros.Designer.cs">
+      <DependentUpon>Registros.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Cadastros\Medico.resx">
+      <DependentUpon>Medico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principais\Agendamento.resx">
+      <DependentUpon>Agendamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cadastros\Animal.resx">
+      <DependentUpon>Animal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cadastros\Dono.resx">
+      <DependentUpon>Dono.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Estrutura.resx">
       <DependentUpon>Estrutura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cadastros\Funcionario.resx">
+      <DependentUpon>Funcionario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -75,6 +126,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Principais\Registros.resx">
+      <DependentUpon>Registros.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
