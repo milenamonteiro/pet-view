@@ -22,7 +22,6 @@ nome_func varchar(70) not null,
 cpf_func char(11) not null,
 rg_func char(9) not null,
 status_func char(8) not null constraint DF_tbFuncionario_status default 'Ativo', -- ativo ou demitido
-data_nasc_func date not null,
 tel_func char(10),
 cel_func char(11),
 email_func varchar(100),
@@ -35,22 +34,14 @@ constraint CK_tbFuncionario_salario check(salario_func >= 0.00)
 );
 GO
 
-create table tbLogin (
-cod_login int identity(1,1) constraint PK_tbLogin primary key,
-nome_login varchar(25) not null,
-senha varchar(20) not null,
-data_cadastro datetime not null constraint DF_tbLogin_data default getdate()
-);
-GO
-
 create table tbUsuario (
 cod_usuario int identity(1,1) constraint PK_tbUsuario primary key,
 nome_usuario varchar(25) not null,
 ativacao_usuario bit not null constraint DF_tbUsuario_ativo default 0,
 data_cadastro datetime not null constraint DF_tbUsuario_data default getdate(),
-cod_login int not null,
+nome_login varchar(25) not null,
+senha_login varchar(20) not null,
 cod_funcionario int not null,
-constraint FK_tbUsuario_tbLogin foreign key(cod_login) references tbLogin(cod_login),
 constraint FK_tbUsuario_tbFuncionario foreign key(cod_funcionario) references tbFuncionario(cod_funcionario)
 );
 GO
