@@ -41,10 +41,6 @@
             this.btnLogOut = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnSair = new System.Windows.Forms.Button();
-            this.medico1 = new PetView.Medico();
-            this.funcionario1 = new PetView.Funcionario();
-            this.animal1 = new PetView.Animal();
-            this.dono1 = new PetView.Dono();
             this.registros1 = new PetView.Registros();
             this.agendamento1 = new PetView.Agendamento();
             this.panel1.SuspendLayout();
@@ -284,38 +280,6 @@
             this.btnSair.UseVisualStyleBackColor = true;
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
-            // medico1
-            // 
-            this.medico1.Location = new System.Drawing.Point(213, 548);
-            this.medico1.Name = "medico1";
-            this.medico1.Size = new System.Drawing.Size(827, 60);
-            this.medico1.TabIndex = 7;
-            this.medico1.Visible = false;
-            // 
-            // funcionario1
-            // 
-            this.funcionario1.Location = new System.Drawing.Point(216, 458);
-            this.funcionario1.Name = "funcionario1";
-            this.funcionario1.Size = new System.Drawing.Size(724, 70);
-            this.funcionario1.TabIndex = 6;
-            this.funcionario1.Visible = false;
-            // 
-            // animal1
-            // 
-            this.animal1.Location = new System.Drawing.Point(216, 374);
-            this.animal1.Name = "animal1";
-            this.animal1.Size = new System.Drawing.Size(724, 106);
-            this.animal1.TabIndex = 5;
-            this.animal1.Visible = false;
-            // 
-            // dono1
-            // 
-            this.dono1.Location = new System.Drawing.Point(213, 292);
-            this.dono1.Name = "dono1";
-            this.dono1.Size = new System.Drawing.Size(727, 76);
-            this.dono1.TabIndex = 4;
-            this.dono1.Visible = false;
-            // 
             // registros1
             // 
             this.registros1.Location = new System.Drawing.Point(213, 162);
@@ -338,10 +302,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1366, 768);
-            this.Controls.Add(this.medico1);
-            this.Controls.Add(this.funcionario1);
-            this.Controls.Add(this.animal1);
-            this.Controls.Add(this.dono1);
             this.Controls.Add(this.registros1);
             this.Controls.Add(this.agendamento1);
             this.Controls.Add(this.panel2);
@@ -373,9 +333,5 @@
         private System.Windows.Forms.Button btnCadastro;
         private System.Windows.Forms.Button btnAnimal;
         private System.Windows.Forms.Button btnDono;
-        private Dono dono1;
-        private Animal animal1;
-        private Funcionario funcionario1;
-        private Medico medico1;
     }
 }

@@ -84,25 +84,25 @@ namespace PetView
         private void btnAnimal_Click(object sender, EventArgs e)
         {
             UnClickAllButtons();
-            OpenUserControl(animal1, btnAnimal);
+            //OpenUserControl(animal1, btnAnimal);
         }
 
         private void btnDono_Click(object sender, EventArgs e)
         {
             UnClickAllButtons();
-            OpenUserControl(dono1, btnDono);
+            //OpenUserControl(dono1, btnDono);
         }
 
         private void btnFuncionario_Click(object sender, EventArgs e)
         {
             UnClickAllButtons();
-            OpenUserControl(funcionario1, btnFuncionario);
+            //OpenUserControl(funcionario1, btnFuncionario);
         }
 
         private void btnMedico_Click(object sender, EventArgs e)
         {
             UnClickAllButtons();
-            OpenUserControl(medico1, btnMedico);
+            //OpenUserControl(medico1, btnMedico);
         }
     }
 }

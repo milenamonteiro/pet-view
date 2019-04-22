@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PetView
 {
-    public partial class Funcionario : UserControl
+    public partial class FormAnimal : UserControl
     {
-        public Funcionario()
+        public FormAnimal()
         {
             InitializeComponent();
         }
