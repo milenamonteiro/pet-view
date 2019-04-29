@@ -42,15 +42,15 @@
             this.txtRGA = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.rtxtDescricao = new System.Windows.Forms.RichTextBox();
+            this.nupIdade = new System.Windows.Forms.NumericUpDown();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.flpBotoes = new System.Windows.Forms.FlowLayoutPanel();
-            this.nupIdade = new System.Windows.Forms.NumericUpDown();
             this.tlpCadastroAnimal.SuspendLayout();
-            this.flpBotoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupIdade)).BeginInit();
+            this.flpBotoes.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpCadastroAnimal
@@ -107,7 +107,7 @@
             this.cboDono.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cboDono.Font = new System.Drawing.Font("Calibri", 13F);
             this.cboDono.FormattingEnabled = true;
-            this.cboDono.Location = new System.Drawing.Point(269, 23);
+            this.cboDono.Location = new System.Drawing.Point(269, 22);
             this.cboDono.Name = "cboDono";
             this.cboDono.Size = new System.Drawing.Size(286, 29);
             this.cboDono.TabIndex = 4;
@@ -240,6 +240,15 @@
             this.rtxtDescricao.TabIndex = 24;
             this.rtxtDescricao.Text = "";
             // 
+            // nupIdade
+            // 
+            this.nupIdade.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nupIdade.Font = new System.Drawing.Font("Calibri", 13F);
+            this.nupIdade.Location = new System.Drawing.Point(849, 133);
+            this.nupIdade.Name = "nupIdade";
+            this.nupIdade.Size = new System.Drawing.Size(277, 29);
+            this.nupIdade.TabIndex = 25;
+            // 
             // btnCancelar
             // 
             this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -300,15 +309,6 @@
             this.flpBotoes.Size = new System.Drawing.Size(1170, 100);
             this.flpBotoes.TabIndex = 7;
             // 
-            // nupIdade
-            // 
-            this.nupIdade.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nupIdade.Font = new System.Drawing.Font("Calibri", 13F);
-            this.nupIdade.Location = new System.Drawing.Point(849, 133);
-            this.nupIdade.Name = "nupIdade";
-            this.nupIdade.Size = new System.Drawing.Size(277, 29);
-            this.nupIdade.TabIndex = 25;
-            // 
             // FormAnimal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,8 +320,8 @@
             this.Size = new System.Drawing.Size(1170, 710);
             this.tlpCadastroAnimal.ResumeLayout(false);
             this.tlpCadastroAnimal.PerformLayout();
-            this.flpBotoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nupIdade)).EndInit();
+            this.flpBotoes.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

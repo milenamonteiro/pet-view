@@ -60,10 +60,9 @@ cod_usuario int identity(1,1) constraint PK_tbUsuario primary key,
 nome_usuario varchar(25) not null,
 ativacao_usuario bit not null constraint DF_tbUsuario_ativo default 0,
 data_cadastro datetime not null constraint DF_tbUsuario_data default getdate(),
-nome_login varchar(25) not null,
-senha_login varchar(20) not null,
-cod_funcionario int not null,
-cod_medico int not null,
+senha_usuario varchar(20) not null,
+cod_funcionario int,
+cod_medico int,
 constraint FK_tbUsuario_tbFuncionario foreign key(cod_funcionario) references tbFuncionario(cod_funcionario),
 constraint FK_tbUsuario_tbMedico foreign key(cod_medico) references tbMedico(cod_medico)
 );
@@ -178,7 +177,7 @@ create proc sp_delete_medico(
 )as
 begin
     update tbMedico set status_med = 'Demitido' where cod_medico = @cod_medico;
-	--delete from tbUsuario where cod_usuario = @cod_medico;
+	delete from tbUsuario where cod_medico = @cod_medico;
 end
 GO
 
@@ -270,7 +269,7 @@ create proc sp_delete_func(
 )as
 begin
     update tbFuncionario set status_func = 'Demitido' where cod_funcionario = @cod_func;
-	--delete from tbUsuario where cod_usuario = @cod_medico;
+	delete from tbUsuario where cod_funcionario = @cod_func;
 end
 GO
 
@@ -478,11 +477,107 @@ create proc sp_select_consulta(
 )
 as
 begin
-	select M.nome_med [Médico], A.nome_animal [Nome], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
-	where A.cod_animal = @cod_animal or D.nome_dono = (select D.nome_dono from tbDono /*não tenho certeza se funciona*/ where D.nome_dono = @nome_dono) or A.nome_animal = (select A.nome_animal from tbAnimal where A.nome_animal = @nome_animal);
-	-- PRECISO TER CERTEZA DO QUE TA ACONTECENDO AQUI
+	where A.cod_animal = @cod_animal or D.nome_dono = @nome_dono or A.nome_animal = @nome_animal or M.nome_med = @nome_medico or C.custo_consulta = @custo_consulta or C.tipo_consulta = @tipo_consulta or C.data_consulta = @data_consulta or M.cod_medico = @cod_medico;
+end
+GO
+
+-- TRATAMENTO
+
+create proc sp_insert_tratamento(
+@cod_animal int,
+@cod_medico int,
+@cod_consulta int,
+@tipo_tratamento varchar(30),
+@observacao_tratamento varchar(150),
+@custo_tratamento money
+) 
+as 
+	begin
+		insert into tbTratamento(cod_animal, cod_medico, cod_consulta, tipo_tratamento, observacao_tratamento, custo_tratamento)
+			values (@cod_animal, @cod_medico, @cod_consulta, @tipo_tratamento, @observacao_tratamento, @custo_tratamento);
+	end
+ GO
+
+create proc sp_select_tratamento(
+@cod_animal int,
+@nome_animal varchar(70),
+@cod_medico int,
+@nome_medico varchar(70),
+@nome_dono varchar(70),
+@custo_tratamento money,
+@tipo_tratamento varchar(30)
+)
+as
+begin
+	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where A.cod_animal = @cod_animal or D.nome_dono = @nome_dono or A.nome_animal = @nome_animal or M.nome_med = @nome_medico or T.custo_tratamento = @custo_tratamento or T.tipo_tratamento = @tipo_tratamento or M.cod_medico = @cod_medico;
+end
+GO
+
+-- EXAME
+
+create proc sp_insert_exame(
+@cod_animal int,
+@cod_medico int,
+@cod_consulta int,
+@tipo_exame varchar(30),
+@observacao_exame varchar(150),
+@custo_exame money,
+@data_exame datetime
+) 
+as 
+	begin
+		insert into tbExame(cod_animal, cod_medico, cod_consulta, tipo_exame, observacao_exame, custo_exame, data_exame)
+			values (@cod_animal, @cod_medico, @cod_consulta, @tipo_exame, @observacao_exame, @custo_exame, @data_exame);
+	end
+ GO
+
+create proc sp_select_exame(
+@cod_animal int,
+@nome_animal varchar(70),
+@cod_medico int,
+@nome_medico varchar(70),
+@nome_dono varchar(70),
+@custo_exame money,
+@tipo_exame varchar(30),
+@data_exame datetime
+)
+as
+begin
+	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where A.cod_animal = @cod_animal or D.nome_dono = @nome_dono or A.nome_animal = @nome_animal or M.nome_med = @nome_medico or E.custo_exame = @custo_exame or E.tipo_exame = @tipo_exame or M.cod_medico = @cod_medico or E.data_exame = @data_exame;
+end
+GO
+
+-- USUÁRIO
+
+create proc sp_insert_usuario(
+@nome_usuario varchar(25),
+@senha_usuario varchar(20),
+@cod_funcionario int = null,
+@cod_medico int = null
+) 
+as 
+	begin
+		insert into tbUsuario(nome_usuario, senha_usuario, cod_funcionario, cod_medico)
+			values (@nome_usuario, @senha_usuario, @cod_funcionario, @cod_medico);
+	end
+ GO
+
+create proc sp_delete_usuario(
+@cod_usuario int
+)as
+begin
+    delete from tbUsuario where cod_usuario = @cod_usuario;
 end
 GO

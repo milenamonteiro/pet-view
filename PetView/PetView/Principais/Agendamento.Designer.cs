@@ -211,7 +211,7 @@
             this.comboBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBox3.Font = new System.Drawing.Font("Calibri", 13F);
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(822, 88);
+            this.comboBox3.Location = new System.Drawing.Point(822, 87);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(317, 29);
             this.comboBox3.TabIndex = 9;
@@ -221,7 +221,7 @@
             this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBox1.Font = new System.Drawing.Font("Calibri", 13F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(256, 33);
+            this.comboBox1.Location = new System.Drawing.Point(256, 32);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(318, 29);
             this.comboBox1.TabIndex = 4;
@@ -231,7 +231,7 @@
             this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBox2.Font = new System.Drawing.Font("Calibri", 13F);
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(257, 88);
+            this.comboBox2.Location = new System.Drawing.Point(257, 87);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(317, 29);
             this.comboBox2.TabIndex = 6;
@@ -241,7 +241,7 @@
             this.comboBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBox4.Font = new System.Drawing.Font("Calibri", 13F);
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(257, 198);
+            this.comboBox4.Location = new System.Drawing.Point(257, 197);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(317, 29);
             this.comboBox4.TabIndex = 19;
@@ -314,7 +314,7 @@
             this.comboBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBox5.Font = new System.Drawing.Font("Calibri", 13F);
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(822, 197);
+            this.comboBox5.Location = new System.Drawing.Point(822, 198);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(317, 29);
             this.comboBox5.TabIndex = 24;

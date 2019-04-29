@@ -20,6 +20,8 @@ namespace PetView
         public Double SalarioFunc { get; set; }
         public Endereco endereco { get; set; }
 
-        public void Cadastrar() { }
+        public void Insert() { }
+        public void Update() { }
+        public void Delete() { }
     }
 }

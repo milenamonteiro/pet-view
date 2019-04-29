@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PetView
 {
-    public class Animal : ICadastro
+    public class Animal : ICadastro<Animal>
     {
         public int CodigoAnimal { get; set; }
         public int RGA { get; set; }
@@ -16,6 +16,8 @@ namespace PetView
         public String Raca { get; set; }
         public String Descricao { get; set; }
         public Dono dono { get; set; }
+
+        public Animal() { }
 
         public Animal(int codigoAnimal, int rGA, string nomeAnimal, int idadeAnimal, string especie, string raca, string descricao, Dono dono)
         {
@@ -29,6 +31,8 @@ namespace PetView
             this.dono = dono;
         }
 
-        public void Cadastrar(Animal animal) { }
+        public void Insert<C>() { }
+        public void Update<C>() { }
+        public void Delete<C>() { }
     }
 }

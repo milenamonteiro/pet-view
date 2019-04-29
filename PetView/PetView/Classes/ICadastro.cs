@@ -6,20 +6,12 @@ using System.Threading.Tasks;
 
 namespace PetView
 {
-    public interface ICadastroAnimal
+    public interface ICadastro<C>
     {
-        IEnumerable<Animal> SelectAll();
-        Animal SelectByID(string id);
-        void Insert(Animal obj);
-        void Update(Animal obj);
-        void Delete(string id);
-    }
-    public interface ICadastro
-    {
-        IEnumerable<Animal> SelectAll();
-        Animal SelectByID(string id);
-        void Insert(Animal obj);
-        void Update(Animal obj);
-        void Delete(string id);
+        //IEnumerable<Animal> SelectAll();
+        //Animal SelectByID(string id);
+        void Insert<C>();
+        void Update<C>();
+        void Delete<C>();
     }
 }
