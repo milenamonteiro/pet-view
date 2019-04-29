@@ -15,7 +15,20 @@ namespace PetView
         public String Especie { get; set; }
         public String Raca { get; set; }
         public String Descricao { get; set; }
+        public Dono dono { get; set; }
 
-        public void Cadastrar() { }
+        public Animal(int codigoAnimal, int rGA, string nomeAnimal, int idadeAnimal, string especie, string raca, string descricao, Dono dono)
+        {
+            CodigoAnimal = codigoAnimal;
+            RGA = rGA;
+            NomeAnimal = nomeAnimal;
+            IdadeAnimal = idadeAnimal;
+            Especie = especie;
+            Raca = raca;
+            Descricao = descricao;
+            this.dono = dono;
+        }
+
+        public void Cadastrar(Animal animal) { }
     }
 }

@@ -17,6 +17,18 @@ namespace PetView
         public String EmailDono { get; set; }
         public Endereco endereco { get; set; }
 
+        public Dono(int codigoDono, string nomeDono, char cPFDono, char rGDono, char celDono, char telDono, string emailDono, Endereco endereco)
+        {
+            CodigoDono = codigoDono;
+            NomeDono = nomeDono;
+            CPFDono = cPFDono;
+            RGDono = rGDono;
+            CelDono = celDono;
+            TelDono = telDono;
+            EmailDono = emailDono;
+            this.endereco = endereco;
+        }
+
         public void Cadastrar() { }
     }
 }

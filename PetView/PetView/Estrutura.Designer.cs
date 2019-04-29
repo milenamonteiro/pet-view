@@ -41,8 +41,12 @@
             this.btnLogOut = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnSair = new System.Windows.Forms.Button();
-            this.registros1 = new PetView.Registros();
             this.agendamento1 = new PetView.Agendamento();
+            this.formAnimal1 = new PetView.FormAnimal();
+            this.formFuncionario1 = new PetView.FormFuncionario();
+            this.formMedico1 = new PetView.FormMedico();
+            this.registros1 = new PetView.Registros();
+            this.formDono1 = new PetView.FormDono();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -62,8 +66,9 @@
             this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(196, 768);
+            this.panel1.Size = new System.Drawing.Size(261, 945);
             this.panel1.TabIndex = 0;
             // 
             // btnAgendamento
@@ -76,10 +81,11 @@
             this.btnAgendamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgendamento.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgendamento.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnAgendamento.Location = new System.Drawing.Point(0, 48);
+            this.btnAgendamento.Location = new System.Drawing.Point(0, 63);
+            this.btnAgendamento.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgendamento.Name = "btnAgendamento";
-            this.btnAgendamento.Padding = new System.Windows.Forms.Padding(10);
-            this.btnAgendamento.Size = new System.Drawing.Size(196, 80);
+            this.btnAgendamento.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.btnAgendamento.Size = new System.Drawing.Size(261, 98);
             this.btnAgendamento.TabIndex = 10;
             this.btnAgendamento.Text = "Novo agendamento";
             this.btnAgendamento.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -96,10 +102,11 @@
             this.btnCadastro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCadastro.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCadastro.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnCadastro.Location = new System.Drawing.Point(0, 128);
+            this.btnCadastro.Location = new System.Drawing.Point(0, 161);
+            this.btnCadastro.Margin = new System.Windows.Forms.Padding(4);
             this.btnCadastro.Name = "btnCadastro";
-            this.btnCadastro.Padding = new System.Windows.Forms.Padding(10);
-            this.btnCadastro.Size = new System.Drawing.Size(196, 80);
+            this.btnCadastro.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.btnCadastro.Size = new System.Drawing.Size(261, 98);
             this.btnCadastro.TabIndex = 9;
             this.btnCadastro.Text = "Novo cadastro";
             this.btnCadastro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -116,10 +123,11 @@
             this.btnAnimal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAnimal.Font = new System.Drawing.Font("Calibri", 13F);
             this.btnAnimal.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnAnimal.Location = new System.Drawing.Point(0, 208);
+            this.btnAnimal.Location = new System.Drawing.Point(0, 259);
+            this.btnAnimal.Margin = new System.Windows.Forms.Padding(4);
             this.btnAnimal.Name = "btnAnimal";
-            this.btnAnimal.Padding = new System.Windows.Forms.Padding(30, 10, 10, 10);
-            this.btnAnimal.Size = new System.Drawing.Size(196, 80);
+            this.btnAnimal.Padding = new System.Windows.Forms.Padding(40, 12, 13, 12);
+            this.btnAnimal.Size = new System.Drawing.Size(261, 98);
             this.btnAnimal.TabIndex = 8;
             this.btnAnimal.Text = "Animal";
             this.btnAnimal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -137,10 +145,11 @@
             this.btnDono.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDono.Font = new System.Drawing.Font("Calibri", 13F);
             this.btnDono.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnDono.Location = new System.Drawing.Point(0, 288);
+            this.btnDono.Location = new System.Drawing.Point(0, 357);
+            this.btnDono.Margin = new System.Windows.Forms.Padding(4);
             this.btnDono.Name = "btnDono";
-            this.btnDono.Padding = new System.Windows.Forms.Padding(30, 10, 10, 10);
-            this.btnDono.Size = new System.Drawing.Size(196, 80);
+            this.btnDono.Padding = new System.Windows.Forms.Padding(40, 12, 13, 12);
+            this.btnDono.Size = new System.Drawing.Size(261, 98);
             this.btnDono.TabIndex = 7;
             this.btnDono.Text = "Dono";
             this.btnDono.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -158,10 +167,11 @@
             this.btnFuncionario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFuncionario.Font = new System.Drawing.Font("Calibri", 13F);
             this.btnFuncionario.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnFuncionario.Location = new System.Drawing.Point(0, 368);
+            this.btnFuncionario.Location = new System.Drawing.Point(0, 455);
+            this.btnFuncionario.Margin = new System.Windows.Forms.Padding(4);
             this.btnFuncionario.Name = "btnFuncionario";
-            this.btnFuncionario.Padding = new System.Windows.Forms.Padding(30, 10, 10, 10);
-            this.btnFuncionario.Size = new System.Drawing.Size(196, 80);
+            this.btnFuncionario.Padding = new System.Windows.Forms.Padding(40, 12, 13, 12);
+            this.btnFuncionario.Size = new System.Drawing.Size(261, 98);
             this.btnFuncionario.TabIndex = 6;
             this.btnFuncionario.Text = "Funcionário";
             this.btnFuncionario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -173,8 +183,9 @@
             // 
             this.button5.Dock = System.Windows.Forms.DockStyle.Top;
             this.button5.Location = new System.Drawing.Point(0, 0);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(196, 58);
+            this.button5.Size = new System.Drawing.Size(261, 71);
             this.button5.TabIndex = 2;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
@@ -189,10 +200,11 @@
             this.btnMedico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMedico.Font = new System.Drawing.Font("Calibri", 13F);
             this.btnMedico.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnMedico.Location = new System.Drawing.Point(0, 448);
+            this.btnMedico.Location = new System.Drawing.Point(0, 553);
+            this.btnMedico.Margin = new System.Windows.Forms.Padding(4);
             this.btnMedico.Name = "btnMedico";
-            this.btnMedico.Padding = new System.Windows.Forms.Padding(30, 10, 10, 10);
-            this.btnMedico.Size = new System.Drawing.Size(196, 80);
+            this.btnMedico.Padding = new System.Windows.Forms.Padding(40, 12, 13, 12);
+            this.btnMedico.Size = new System.Drawing.Size(261, 98);
             this.btnMedico.TabIndex = 5;
             this.btnMedico.Text = "Médico";
             this.btnMedico.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -210,10 +222,11 @@
             this.btnRegistros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegistros.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegistros.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnRegistros.Location = new System.Drawing.Point(0, 528);
+            this.btnRegistros.Location = new System.Drawing.Point(0, 651);
+            this.btnRegistros.Margin = new System.Windows.Forms.Padding(4);
             this.btnRegistros.Name = "btnRegistros";
-            this.btnRegistros.Padding = new System.Windows.Forms.Padding(10);
-            this.btnRegistros.Size = new System.Drawing.Size(196, 80);
+            this.btnRegistros.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.btnRegistros.Size = new System.Drawing.Size(261, 98);
             this.btnRegistros.TabIndex = 4;
             this.btnRegistros.Text = "Registros";
             this.btnRegistros.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -230,10 +243,11 @@
             this.btnAgenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgenda.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgenda.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnAgenda.Location = new System.Drawing.Point(0, 608);
+            this.btnAgenda.Location = new System.Drawing.Point(0, 749);
+            this.btnAgenda.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgenda.Name = "btnAgenda";
-            this.btnAgenda.Padding = new System.Windows.Forms.Padding(10);
-            this.btnAgenda.Size = new System.Drawing.Size(196, 80);
+            this.btnAgenda.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.btnAgenda.Size = new System.Drawing.Size(261, 98);
             this.btnAgenda.TabIndex = 3;
             this.btnAgenda.Text = "Agenda";
             this.btnAgenda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -250,10 +264,11 @@
             this.btnLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogOut.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogOut.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnLogOut.Location = new System.Drawing.Point(0, 688);
+            this.btnLogOut.Location = new System.Drawing.Point(0, 847);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Padding = new System.Windows.Forms.Padding(10);
-            this.btnLogOut.Size = new System.Drawing.Size(196, 80);
+            this.btnLogOut.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.btnLogOut.Size = new System.Drawing.Size(261, 98);
             this.btnLogOut.TabIndex = 2;
             this.btnLogOut.Text = "Sair";
             this.btnLogOut.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -264,49 +279,97 @@
             this.panel2.BackColor = System.Drawing.Color.Snow;
             this.panel2.Controls.Add(this.btnSair);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(196, 0);
+            this.panel2.Location = new System.Drawing.Point(261, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1170, 58);
+            this.panel2.Size = new System.Drawing.Size(1560, 71);
             this.panel2.TabIndex = 1;
             // 
             // btnSair
             // 
             this.btnSair.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSair.Location = new System.Drawing.Point(1095, 0);
+            this.btnSair.FlatAppearance.BorderSize = 0;
+            this.btnSair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSair.Font = new System.Drawing.Font("Calibri", 13F);
+            this.btnSair.Location = new System.Drawing.Point(1460, 0);
+            this.btnSair.Margin = new System.Windows.Forms.Padding(4);
             this.btnSair.Name = "btnSair";
-            this.btnSair.Size = new System.Drawing.Size(75, 58);
+            this.btnSair.Size = new System.Drawing.Size(100, 71);
             this.btnSair.TabIndex = 0;
             this.btnSair.Text = "X";
             this.btnSair.UseVisualStyleBackColor = true;
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
-            // registros1
-            // 
-            this.registros1.Location = new System.Drawing.Point(213, 162);
-            this.registros1.Name = "registros1";
-            this.registros1.Size = new System.Drawing.Size(727, 95);
-            this.registros1.TabIndex = 3;
-            this.registros1.Visible = false;
-            // 
             // agendamento1
             // 
-            this.agendamento1.Location = new System.Drawing.Point(213, 64);
+            this.agendamento1.Location = new System.Drawing.Point(304, 90);
+            this.agendamento1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.agendamento1.Name = "agendamento1";
-            this.agendamento1.Size = new System.Drawing.Size(727, 70);
+            this.agendamento1.Size = new System.Drawing.Size(651, 71);
             this.agendamento1.TabIndex = 2;
             this.agendamento1.Visible = false;
             // 
+            // formAnimal1
+            // 
+            this.formAnimal1.Location = new System.Drawing.Point(304, 210);
+            this.formAnimal1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.formAnimal1.Name = "formAnimal1";
+            this.formAnimal1.Size = new System.Drawing.Size(732, 89);
+            this.formAnimal1.TabIndex = 3;
+            this.formAnimal1.Visible = false;
+            // 
+            // formFuncionario1
+            // 
+            this.formFuncionario1.Location = new System.Drawing.Point(304, 345);
+            this.formFuncionario1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.formFuncionario1.Name = "formFuncionario1";
+            this.formFuncionario1.Size = new System.Drawing.Size(716, 91);
+            this.formFuncionario1.TabIndex = 4;
+            this.formFuncionario1.Visible = false;
+            // 
+            // formMedico1
+            // 
+            this.formMedico1.Location = new System.Drawing.Point(303, 472);
+            this.formMedico1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.formMedico1.Name = "formMedico1";
+            this.formMedico1.Size = new System.Drawing.Size(733, 98);
+            this.formMedico1.TabIndex = 5;
+            this.formMedico1.Visible = false;
+            // 
+            // registros1
+            // 
+            this.registros1.Location = new System.Drawing.Point(304, 623);
+            this.registros1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.registros1.Name = "registros1";
+            this.registros1.Size = new System.Drawing.Size(818, 113);
+            this.registros1.TabIndex = 6;
+            this.registros1.Visible = false;
+            // 
+            // formDono1
+            // 
+            this.formDono1.Location = new System.Drawing.Point(304, 771);
+            this.formDono1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.formDono1.Name = "formDono1";
+            this.formDono1.Size = new System.Drawing.Size(833, 133);
+            this.formDono1.TabIndex = 7;
+            this.formDono1.Visible = false;
+            // 
             // Estrutura
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.ClientSize = new System.Drawing.Size(1821, 945);
+            this.Controls.Add(this.formDono1);
             this.Controls.Add(this.registros1);
+            this.Controls.Add(this.formMedico1);
+            this.Controls.Add(this.formFuncionario1);
+            this.Controls.Add(this.formAnimal1);
             this.Controls.Add(this.agendamento1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Estrutura";
             this.Text = "Estrutura";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -326,12 +389,16 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnSair;
-        private Agendamento agendamento1;
-        private Registros registros1;
         private System.Windows.Forms.Button btnFuncionario;
         private System.Windows.Forms.Button btnAgendamento;
         private System.Windows.Forms.Button btnCadastro;
         private System.Windows.Forms.Button btnAnimal;
         private System.Windows.Forms.Button btnDono;
+        private Agendamento agendamento1;
+        private FormAnimal formAnimal1;
+        private FormFuncionario formFuncionario1;
+        private FormMedico formMedico1;
+        private Registros registros1;
+        private FormDono formDono1;
     }
 }
