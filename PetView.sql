@@ -124,7 +124,7 @@ constraint FK_tbTratamento_tbConsulta foreign key(cod_consulta) references tbCon
 GO
 
 create table tbExame(
-cod_exame int identity(1,1) constraint PK_tbTratamento primary key,
+cod_exame int identity(1,1) constraint PK_tbExame primary key,
 cod_animal int not null,
 cod_medico int not null,
 cod_consulta int not null,
@@ -245,7 +245,6 @@ create proc sp_insert_func(
 @nome_func varchar(70),
 @cpf_func char(11),
 @rg_func char(9),
-@status_func char(8),
 @tel_func char(10),
 @cel_func char(11),
 @email_func varchar(100),
@@ -259,8 +258,8 @@ as
 
 		insert into tbEndereco (cep, numero, rua, bairro, complemento, cidade, uf)
 				values (@cep, @numero, @rua, @bairro, @complemento, @cidade, @uf);
-		insert into tbFuncionario(nome_func, cpf_func, rg_func, status_func, tel_func, cel_func, email_func, cargo_func, salario_func, cep_func, numcasa_func)
-			values(@nome_func, @cpf_func, @rg_func, @status_func, @tel_func, @cel_func, @email_func, @cargo_func, @salario_func, @cep, @numero)
+		insert into tbFuncionario(nome_func, cpf_func, rg_func, tel_func, cel_func, email_func, cargo_func, salario_func, cep_func, numcasa_func)
+			values(@nome_func, @cpf_func, @rg_func, @tel_func, @cel_func, @email_func, @cargo_func, @salario_func, @cep, @numero)
 	end
  GO
 
@@ -285,7 +284,6 @@ create proc sp_update_func(
 @nome_func varchar(70),
 @cpf_func char(11),
 @rg_func char(9),
-@status_func char(8),
 @tel_func char(10),
 @cel_func char(11),
 @email_func varchar(100),
@@ -297,7 +295,7 @@ begin
 	set cep = @cep, numero = @numero, rua = @rua, bairro = @bairro, complemento = @complemento, cidade = @cidade, uf = @uf
 	where cep = (select cep from tbEndereco inner join tbFuncionario on tbFuncionario.cep_func = tbEndereco.cep where tbFuncionario.cod_funcionario = @cod_funcionario) and numero = (select numero from tbEndereco inner join tbFuncionario on tbFuncionario.numcasa_func = tbEndereco.numero where tbFuncionario.cod_funcionario = @cod_funcionario);
 	update tbFuncionario
-	set nome_func = @nome_func, cpf_func = @cpf_func, rg_func = @rg_func, status_func = @status_func, tel_func = @tel_func, cel_func = @cel_func, email_func = @email_func, cargo_func = @cargo_func, salario_func = @salario_func, cep_func = @cep, numcasa_func = @numero
+	set nome_func = @nome_func, cpf_func = @cpf_func, rg_func = @rg_func, tel_func = @tel_func, cel_func = @cel_func, email_func = @email_func, cargo_func = @cargo_func, salario_func = @salario_func, cep_func = @cep, numcasa_func = @numero
 	where cod_funcionario = @cod_funcionario;
 end
 GO
@@ -569,8 +567,13 @@ create proc sp_insert_usuario(
 ) 
 as 
 	begin
-		insert into tbUsuario(nome_usuario, senha_usuario, cod_funcionario, cod_medico)
-			values (@nome_usuario, @senha_usuario, @cod_funcionario, @cod_medico);
+	if (select count (*) as cnt from tbUsuario where nome_usuario = @nome_usuario and senha_usuario = @senha_usuario) = 0
+		begin
+			insert into tbUsuario(nome_usuario, senha_usuario, cod_funcionario, cod_medico)
+				values (@nome_usuario, @senha_usuario, @cod_funcionario, @cod_medico);
+		end
+	else
+		print 'Já existe um usuário com esse nome!'
 	end
  GO
 
@@ -580,4 +583,48 @@ create proc sp_delete_usuario(
 begin
     delete from tbUsuario where cod_usuario = @cod_usuario;
 end
+GO
+
+create proc sp_select_usuario_ativo(
+@cod_funcionario int = null,
+@cod_medico int = null
+)
+as
+begin
+	select M.nome_med, F.nome_func from tbUsuario U
+	left join tbMedico M on M.cod_medico = U.cod_medico
+	left join tbFuncionario F on F.cod_funcionario = U.cod_funcionario
+	where ativacao_usuario = 1;
+end
+GO
+
+create proc sp_logar_usuario(
+@nome_usuario varchar (25),
+@senha_usuario varchar (20)
+)
+as
+begin
+	if (select count (*) as CNT from tbUsuario where nome_usuario = @nome_usuario and senha_usuario = @senha_usuario) = 1
+		update tbUsuario set ativacao_usuario = 1 where nome_usuario = @nome_usuario and senha_usuario = @senha_usuario;
+end
+GO
+
+-- INSERTS DE TESTE
+
+exec sp_insert_func '12345678', 22, 'Rua rua', 'Bairro bairro', null, 'Cidade cidade', 'UF', 'Jorje', '12345678901', '123456789', '11986376726', '27362651', 'aaa', 'func', 1111
+GO
+
+exec sp_insert_usuario 'nome', 'senha', 1
+GO
+
+update tbUsuario set ativacao_usuario = 0 where cod_usuario = 1
+GO
+
+exec sp_select_usuario_ativo
+GO
+
+UPDATE tbUsuario SET ativacao_usuario = 1 WHERE nome_usuario = 'nome' and senha_usuario = 'senha'
+GO
+
+select*from tbUsuario
 GO

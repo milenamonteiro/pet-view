@@ -86,6 +86,12 @@
     <Compile Include="Classes\ICadastro.cs" />
     <Compile Include="Classes\Medico.cs" />
     <Compile Include="Classes\Funcionario.cs" />
+    <Compile Include="Principais\FormAgenda.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Principais\FormAgenda.Designer.cs">
+      <DependentUpon>FormAgenda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Principais\Agendamento.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,6 +124,7 @@
     <Compile Include="Principais\Registros.Designer.cs">
       <DependentUpon>Registros.cs</DependentUpon>
     </Compile>
+    <Compile Include="StringConexao.cs" />
     <EmbeddedResource Include="Cadastros\FormDono.resx">
       <DependentUpon>FormDono.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cadastros\FormMedico.resx">
       <DependentUpon>FormMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principais\FormAgenda.resx">
+      <DependentUpon>FormAgenda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principais\Agendamento.resx">
       <DependentUpon>Agendamento.cs</DependentUpon>
@@ -147,6 +157,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Principais\Registros.resx">
       <DependentUpon>Registros.cs</DependentUpon>
@@ -175,6 +186,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo vet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
