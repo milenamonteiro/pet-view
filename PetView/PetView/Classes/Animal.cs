@@ -16,6 +16,7 @@ namespace PetView
         public int RGA { get; set; }
         public String NomeAnimal { get; set; }
         public int IdadeAnimal { get; set; }
+        public String Tempo { get; set; }
         public String Especie { get; set; }
         public String Raca { get; set; }
         public String Descricao { get; set; }
@@ -23,28 +24,33 @@ namespace PetView
 
         public Animal() { }
 
-        public Animal(int rGA, string nomeAnimal, int idadeAnimal, string especie, string raca, string descricao, Dono dono)
+        public Animal(int rGA, string nomeAnimal, int idadeAnimal, string tempo, string especie, string raca, string descricao, int codDono)
         {
             RGA = rGA;
             NomeAnimal = nomeAnimal;
             IdadeAnimal = idadeAnimal;
+            Tempo = tempo;
             Especie = especie;
             Raca = raca;
             Descricao = descricao;
-            this.dono = dono;
+            dono.CodigoDono = codDono;
         }
 
         public void Insert()
         {
             SqlConnection con = new SqlConnection(StringConexao.connectionString);
 
-            SqlCommand cmd = new SqlCommand("SP_INSERT_FUNCIONARIO", con);
+            SqlCommand cmd = new SqlCommand("sp_insert_animal", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@CEP", SqlDbType.VarChar).Value = Descricao ?? SqlString.Null;
-            cmd.Parameters.Add("@CEP", SqlDbType.Int).Value = (object)Descricao ?? DBNull.Value;
-            cmd.Parameters.Add("@NUMERO", SqlDbType.Int).Value = RGA;
-            cmd.Parameters.Add("@RUA", SqlDbType.VarChar).Value = NomeAnimal;
+            cmd.Parameters.Add("@rga", SqlDbType.Int).Value = (object)RGA ?? DBNull.Value;
+            cmd.Parameters.Add("@cod_dono", SqlDbType.Int).Value = dono.CodigoDono;
+            cmd.Parameters.Add("@nome_animal", SqlDbType.VarChar).Value = NomeAnimal;
+            cmd.Parameters.Add("@idade", SqlDbType.Int).Value = IdadeAnimal;
+            cmd.Parameters.Add("@tipo_idade", SqlDbType.VarChar).Value = Tempo;
+            cmd.Parameters.Add("@raca_animal", SqlDbType.VarChar).Value = Raca;
+            cmd.Parameters.Add("@especie", SqlDbType.VarChar).Value = Especie;
+            cmd.Parameters.Add("@descricao", SqlDbType.VarChar).Value = Descricao;
 
             con.Open();
 
@@ -53,7 +59,7 @@ namespace PetView
                 int i = cmd.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    MessageBox.Show("Funcionário registrado com sucesso!", "Cadastro finalizado.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Animal registrado com sucesso!", "Cadastro finalizado.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (SqlException e)
@@ -68,7 +74,44 @@ namespace PetView
                 }
             }
         }
-        public void Update() { }
+
+        public void Update()
+        {
+            SqlConnection con = new SqlConnection(StringConexao.connectionString);
+
+            SqlCommand cmd = new SqlCommand("sp_update_animal", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@cod_animal", SqlDbType.Int).Value = CodigoAnimal;
+            cmd.Parameters.Add("@rga", SqlDbType.Int).Value = (object)RGA ?? DBNull.Value;
+            cmd.Parameters.Add("@nome_animal", SqlDbType.VarChar).Value = NomeAnimal;
+            cmd.Parameters.Add("@idade", SqlDbType.Int).Value = IdadeAnimal;
+            cmd.Parameters.Add("@raca_animal", SqlDbType.VarChar).Value = Raca;
+            cmd.Parameters.Add("@especie", SqlDbType.VarChar).Value = Especie;
+            cmd.Parameters.Add("@descricao", SqlDbType.VarChar).Value = Descricao;
+
+            con.Open();
+
+            try
+            {
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    MessageBox.Show("Registros do animal atualizados com sucesso!", "Atualização finalizada.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Erro: " + e.ToString());
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
+        }
         public void Delete() { }
     }
 }

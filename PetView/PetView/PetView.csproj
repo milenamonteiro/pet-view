@@ -86,6 +86,26 @@
     <Compile Include="Classes\ICadastro.cs" />
     <Compile Include="Classes\Medico.cs" />
     <Compile Include="Classes\Funcionario.cs" />
+    <Compile Include="Classes\Consulta.cs" />
+    <Compile Include="Classes\Exame.cs" />
+    <Compile Include="Medico\FormExame.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Medico\FormExame.Designer.cs">
+      <DependentUpon>FormExame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Medico\FormTratamento.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Medico\FormTratamento.Designer.cs">
+      <DependentUpon>FormTratamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Medico\FormConsulta.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Medico\FormConsulta.Designer.cs">
+      <DependentUpon>FormConsulta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Principais\FormAgenda.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -125,6 +145,7 @@
       <DependentUpon>Registros.cs</DependentUpon>
     </Compile>
     <Compile Include="StringConexao.cs" />
+    <Compile Include="Classes\Tratamento.cs" />
     <EmbeddedResource Include="Cadastros\FormDono.resx">
       <DependentUpon>FormDono.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,6 +154,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cadastros\FormMedico.resx">
       <DependentUpon>FormMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medico\FormExame.resx">
+      <DependentUpon>FormExame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medico\FormTratamento.resx">
+      <DependentUpon>FormTratamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medico\FormConsulta.resx">
+      <DependentUpon>FormConsulta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principais\FormAgenda.resx">
       <DependentUpon>FormAgenda.cs</DependentUpon>

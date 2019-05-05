@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace PetView
 {
-    public partial class FormDono : UserControl
+    public partial class FormTratamento : UserControl
     {
-        public FormDono()
+        public FormTratamento()
         {
             InitializeComponent();
-        }
-
-        private void btnCadastrar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

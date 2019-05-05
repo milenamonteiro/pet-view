@@ -146,17 +146,17 @@ namespace PetView
 
         private void btnConsulta_Click(object sender, EventArgs e)
         {
-            ClickButton(agendamento1, btnConsulta);
+            ClickButton(formConsulta1, btnConsulta);
         }
 
         private void btnExame_Click(object sender, EventArgs e)
         {
-            ClickButton(agendamento1, btnExame);
+            ClickButton(formExame1, btnExame);
         }
 
         private void btnTratamento_Click(object sender, EventArgs e)
         {
-            ClickButton(agendamento1, btnTratamento);
+            ClickButton(formTratamento1, btnTratamento);
         }
 
         private void Estrutura_Load(object sender, EventArgs e)

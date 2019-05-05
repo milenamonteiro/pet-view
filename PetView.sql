@@ -88,6 +88,7 @@ rga int,
 cod_dono int not null,
 nome_animal varchar(30) not null,
 idade int not null,
+tipo_idade char(5) not null,
 raca_animal varchar(30) not null,
 especie varchar(30) not null,
 descricao varchar(100) not null,
@@ -99,11 +100,12 @@ create table tbConsulta(
 cod_consulta int identity(1,1) constraint PK_tbConsulta primary key,
 cod_animal int not null,
 cod_medico int not null,
-sintomas varchar(300) not null,
-diagnostico varchar(300) not null,
+sintomas varchar(1000),
+diagnostico varchar(1000),
 custo_consulta money not null,
-tipo_consulta varchar(15) not null,
-data_consulta datetime constraint DF_tbConsulta_data default getdate(),
+tipo_consulta varchar(30) not null,
+data_consulta datetime not null,
+observacao_consulta varchar(300),
 constraint FK_tbConsulta_tbAnimal foreign key(cod_animal) references tbAnimal(cod_animal),
 constraint FK_tbConsulta_tbMedico foreign key(cod_medico) references tbMedico(cod_medico)
 );
@@ -115,8 +117,9 @@ cod_animal int not null,
 cod_medico int not null,
 cod_consulta int not null,
 tipo_tratamento varchar(30) not null,
-observacao_tratamento varchar(150) not null,
+observacao_tratamento varchar(300),
 custo_tratamento money not null,
+data_tratamento datetime not null,
 constraint FK_tbTratamento_tbAnimal foreign key(cod_animal) references tbAnimal(cod_animal),
 constraint FK_tbTratamento_tbMedico foreign key(cod_medico) references tbMedico(cod_medico),
 constraint FK_tbTratamento_tbConsulta foreign key(cod_consulta) references tbConsulta(cod_consulta)
@@ -129,9 +132,9 @@ cod_animal int not null,
 cod_medico int not null,
 cod_consulta int not null,
 tipo_exame varchar(30) not null,
-observacao_exame varchar(150) not null,
+observacao_exame varchar(300),
 custo_exame money not null,
-data_exame datetime constraint DF_tbExame_data default getdate(),
+data_exame datetime not null,
 constraint FK_tbExame_tbAnimal foreign key(cod_animal) references tbAnimal(cod_animal),
 constraint FK_tbExame_tbMedico foreign key(cod_medico) references tbMedico(cod_medico),
 constraint FK_tbExame_tbConsulta foreign key(cod_consulta) references tbConsulta(cod_consulta)
@@ -198,7 +201,6 @@ create proc sp_update_medico(
 @cel_med char(10),
 @tel_med char(10),
 @email_med varchar(100),
-@status_med char(8),
 @salario_med money
 )as
 begin
@@ -206,7 +208,7 @@ begin
 	set cep = @cep, numero = @numero, rua = @rua, bairro = @bairro, complemento = @complemento, cidade = @cidade, uf = @uf
 	where cep = (select cep from tbEndereco inner join tbMedico on tbMedico.cep_med = tbEndereco.cep where tbMedico.cod_medico = @cod_medico) and numero = (select numero from tbEndereco inner join tbMedico on tbMedico.numcasa_med = tbEndereco.numero where tbMedico.cod_medico = @cod_medico);
 	update tbMedico
-	set crmv = @crmv, nome_med = @nome_med, funcao_med = @funcao_med, cpf_med = @cpf_med, rg_med = @rg_med, cel_med = @cel_med, tel_med = @tel_med, email_med = @email_med, status_med = @status_med, salario_med = @salario_med, cep_med = @cep, numcasa_med = @numero
+	set crmv = @crmv, nome_med = @nome_med, funcao_med = @funcao_med, cpf_med = @cpf_med, rg_med = @rg_med, cel_med = @cel_med, tel_med = @tel_med, email_med = @email_med, salario_med = @salario_med, cep_med = @cep, numcasa_med = @numero
 	where cod_medico = @cod_medico;
 end
 GO
@@ -399,14 +401,15 @@ create proc sp_insert_animal(
 @cod_dono int,
 @nome_animal varchar(70),
 @idade int,
+@tipo_idade char(5),
 @raca_animal varchar(30),
 @especie varchar(30),
 @descricao varchar(100)
 ) 
 as 
 	begin
-		insert into tbAnimal (rga, cod_dono, nome_animal, idade, raca_animal, especie, descricao)
-			values(@rga, @cod_dono, @nome_animal, @idade, @raca_animal, @especie, @descricao)
+		insert into tbAnimal (rga, cod_dono, nome_animal, idade, tipo_idade, raca_animal, especie, descricao)
+			values(@rga, @cod_dono, @nome_animal, @idade, @tipo_idade, @raca_animal, @especie, @descricao)
 	end
  GO
 
@@ -415,13 +418,14 @@ create proc sp_update_animal(
 @rga int,
 @nome_animal varchar(70),
 @idade int,
+@tipo_idade char(5),
 @raca_animal varchar(30),
 @especie varchar(30),
 @descricao varchar(100)
 )as
 begin
 	update tbAnimal
-	set rga = @rga, nome_animal = @nome_animal, idade = @idade, raca_animal = @raca_animal, especie = @especie, descricao = @descricao
+	set rga = @rga, nome_animal = @nome_animal, idade = @idade, raca_animal = @raca_animal, tipo_idade = @tipo_idade, especie = @especie, descricao = @descricao
 	where cod_animal = @cod_animal;
 end
 GO
@@ -446,20 +450,18 @@ GO
 
 -- CONSULTA
 
--- Quando for cadastrar coloca 2 combo box, ai seleciona o dono e na segunda mostra os animais desse dono, então vai selecionar o código certo do animal
 create proc sp_insert_consulta(
 @cod_animal int,
 @cod_medico int,
-@sintomas varchar(300),
-@diagnostico varchar(300),
 @custo_consulta money,
+@observacao_consulta varchar(300),
 @tipo_consulta varchar(15),
 @data_consulta datetime
 ) 
 as 
 	begin
-		insert into tbConsulta (cod_animal, cod_medico, sintomas, diagnostico, custo_consulta, tipo_consulta, data_consulta)
-			values(@cod_animal, @cod_medico, @sintomas, @diagnostico, @custo_consulta, @tipo_consulta, @data_consulta)
+		insert into tbConsulta (cod_animal, cod_medico, observacao_consulta, custo_consulta, tipo_consulta, data_consulta)
+			values(@cod_animal, @cod_medico, @observacao_consulta, @custo_consulta, @tipo_consulta, @data_consulta)
 	end
  GO
 
@@ -490,13 +492,14 @@ create proc sp_insert_tratamento(
 @cod_medico int,
 @cod_consulta int,
 @tipo_tratamento varchar(30),
-@observacao_tratamento varchar(150),
-@custo_tratamento money
+@observacao_tratamento varchar(300),
+@custo_tratamento money,
+@data_tratamento datetime
 ) 
 as 
 	begin
-		insert into tbTratamento(cod_animal, cod_medico, cod_consulta, tipo_tratamento, observacao_tratamento, custo_tratamento)
-			values (@cod_animal, @cod_medico, @cod_consulta, @tipo_tratamento, @observacao_tratamento, @custo_tratamento);
+		insert into tbTratamento(cod_animal, cod_medico, cod_consulta, tipo_tratamento, observacao_tratamento, custo_tratamento, data_tratamento)
+			values (@cod_animal, @cod_medico, @cod_consulta, @tipo_tratamento, @observacao_tratamento, @custo_tratamento, @data_tratamento);
 	end
  GO
 

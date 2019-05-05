@@ -53,6 +53,9 @@
             this.formFuncionario1 = new PetView.FormFuncionario();
             this.formAnimal1 = new PetView.FormAnimal();
             this.agendamento1 = new PetView.Agendamento();
+            this.formConsulta1 = new PetView.FormConsulta();
+            this.formExame1 = new PetView.FormExame();
+            this.formTratamento1 = new PetView.FormTratamento();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -403,7 +406,7 @@
             // 
             this.formAgenda1.Location = new System.Drawing.Point(320, 931);
             this.formAgenda1.Name = "formAgenda1";
-            this.formAgenda1.Size = new System.Drawing.Size(817, 44);
+            this.formAgenda1.Size = new System.Drawing.Size(369, 130);
             this.formAgenda1.TabIndex = 8;
             this.formAgenda1.Visible = false;
             // 
@@ -412,7 +415,7 @@
             this.formDono1.Location = new System.Drawing.Point(304, 771);
             this.formDono1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.formDono1.Name = "formDono1";
-            this.formDono1.Size = new System.Drawing.Size(833, 133);
+            this.formDono1.Size = new System.Drawing.Size(385, 133);
             this.formDono1.TabIndex = 7;
             this.formDono1.Visible = false;
             // 
@@ -421,7 +424,7 @@
             this.registros1.Location = new System.Drawing.Point(304, 623);
             this.registros1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.registros1.Name = "registros1";
-            this.registros1.Size = new System.Drawing.Size(818, 113);
+            this.registros1.Size = new System.Drawing.Size(385, 113);
             this.registros1.TabIndex = 6;
             this.registros1.Visible = false;
             // 
@@ -430,7 +433,7 @@
             this.formMedico1.Location = new System.Drawing.Point(303, 472);
             this.formMedico1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.formMedico1.Name = "formMedico1";
-            this.formMedico1.Size = new System.Drawing.Size(733, 98);
+            this.formMedico1.Size = new System.Drawing.Size(386, 98);
             this.formMedico1.TabIndex = 5;
             this.formMedico1.Visible = false;
             // 
@@ -439,7 +442,7 @@
             this.formFuncionario1.Location = new System.Drawing.Point(304, 345);
             this.formFuncionario1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.formFuncionario1.Name = "formFuncionario1";
-            this.formFuncionario1.Size = new System.Drawing.Size(716, 91);
+            this.formFuncionario1.Size = new System.Drawing.Size(385, 91);
             this.formFuncionario1.TabIndex = 4;
             this.formFuncionario1.Visible = false;
             // 
@@ -448,18 +451,42 @@
             this.formAnimal1.Location = new System.Drawing.Point(304, 210);
             this.formAnimal1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.formAnimal1.Name = "formAnimal1";
-            this.formAnimal1.Size = new System.Drawing.Size(732, 89);
+            this.formAnimal1.Size = new System.Drawing.Size(385, 89);
             this.formAnimal1.TabIndex = 3;
             this.formAnimal1.Visible = false;
             // 
             // agendamento1
             // 
             this.agendamento1.Location = new System.Drawing.Point(304, 90);
-            this.agendamento1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.agendamento1.Margin = new System.Windows.Forms.Padding(4);
             this.agendamento1.Name = "agendamento1";
-            this.agendamento1.Size = new System.Drawing.Size(651, 71);
+            this.agendamento1.Size = new System.Drawing.Size(385, 71);
             this.agendamento1.TabIndex = 2;
             this.agendamento1.Visible = false;
+            // 
+            // formConsulta1
+            // 
+            this.formConsulta1.Location = new System.Drawing.Point(903, 90);
+            this.formConsulta1.Name = "formConsulta1";
+            this.formConsulta1.Size = new System.Drawing.Size(298, 114);
+            this.formConsulta1.TabIndex = 9;
+            this.formConsulta1.Visible = false;
+            // 
+            // formExame1
+            // 
+            this.formExame1.Location = new System.Drawing.Point(903, 262);
+            this.formExame1.Name = "formExame1";
+            this.formExame1.Size = new System.Drawing.Size(298, 130);
+            this.formExame1.TabIndex = 10;
+            this.formExame1.Visible = false;
+            // 
+            // formTratamento1
+            // 
+            this.formTratamento1.Location = new System.Drawing.Point(903, 453);
+            this.formTratamento1.Name = "formTratamento1";
+            this.formTratamento1.Size = new System.Drawing.Size(298, 130);
+            this.formTratamento1.TabIndex = 11;
+            this.formTratamento1.Visible = false;
             // 
             // Estrutura
             // 
@@ -467,6 +494,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1942, 1102);
+            this.Controls.Add(this.formTratamento1);
+            this.Controls.Add(this.formExame1);
+            this.Controls.Add(this.formConsulta1);
             this.Controls.Add(this.formAgenda1);
             this.Controls.Add(this.formDono1);
             this.Controls.Add(this.registros1);
@@ -515,5 +545,8 @@
         private System.Windows.Forms.Label lblBemVindo;
         private FormAgenda formAgenda1;
         private System.Windows.Forms.Panel pnlSeguidora;
+        private FormConsulta formConsulta1;
+        private FormExame formExame1;
+        private FormTratamento formTratamento1;
     }
 }
