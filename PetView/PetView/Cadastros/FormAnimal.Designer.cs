@@ -45,12 +45,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbMeses = new System.Windows.Forms.RadioButton();
             this.rbAnos = new System.Windows.Forms.RadioButton();
+            this.txtRGA = new System.Windows.Forms.MaskedTextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.flpBotoes = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtRGA = new System.Windows.Forms.MaskedTextBox();
             this.tlpCadastroAnimal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupIdade)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -111,6 +111,7 @@
             // cboDono
             // 
             this.cboDono.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboDono.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDono.Font = new System.Drawing.Font("Calibri", 13F);
             this.cboDono.FormattingEnabled = true;
             this.cboDono.Location = new System.Drawing.Point(368, 28);
@@ -195,6 +196,7 @@
             this.txtEspecie.Font = new System.Drawing.Font("Calibri", 13F);
             this.txtEspecie.Location = new System.Drawing.Point(365, 97);
             this.txtEspecie.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEspecie.MaxLength = 30;
             this.txtEspecie.Name = "txtEspecie";
             this.txtEspecie.Size = new System.Drawing.Size(367, 34);
             this.txtEspecie.TabIndex = 2;
@@ -264,7 +266,7 @@
             this.groupBox1.Location = new System.Drawing.Point(1110, 219);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(412, 62);
-            this.groupBox1.TabIndex = 29;
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             // 
             // rbMeses
@@ -288,6 +290,18 @@
             this.rbAnos.TabIndex = 6;
             this.rbAnos.Text = "Anos";
             this.rbAnos.UseVisualStyleBackColor = true;
+            // 
+            // txtRGA
+            // 
+            this.txtRGA.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtRGA.Font = new System.Drawing.Font("Calibri", 13F);
+            this.txtRGA.Location = new System.Drawing.Point(366, 233);
+            this.txtRGA.Mask = "000000000";
+            this.txtRGA.Name = "txtRGA";
+            this.txtRGA.Size = new System.Drawing.Size(366, 34);
+            this.txtRGA.TabIndex = 8;
+            this.txtRGA.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.txtRGA.ValidatingType = typeof(int);
             // 
             // btnCancelar
             // 
@@ -351,17 +365,6 @@
             this.flpBotoes.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.flpBotoes.Size = new System.Drawing.Size(1560, 123);
             this.flpBotoes.TabIndex = 7;
-            // 
-            // txtRGA
-            // 
-            this.txtRGA.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtRGA.Font = new System.Drawing.Font("Calibri", 13F);
-            this.txtRGA.Location = new System.Drawing.Point(366, 233);
-            this.txtRGA.Mask = "000000000";
-            this.txtRGA.Name = "txtRGA";
-            this.txtRGA.Size = new System.Drawing.Size(366, 34);
-            this.txtRGA.TabIndex = 8;
-            this.txtRGA.ValidatingType = typeof(int);
             // 
             // FormAnimal
             // 

@@ -33,10 +33,10 @@ namespace PetView
                 dt.Columns.Add("Dono", typeof(string));
                 dt.Load(reader);
 
-                cboDono.ValueMember = "CODIGO";
-                cboDono.DisplayMember = "DEFENSIVO";
-                cboDono.SelectedIndex = -1;
+                cboDono.ValueMember = "Codigo";
+                cboDono.DisplayMember = "Dono";
                 cboDono.DataSource = dt;
+                cboDono.SelectedIndex = -1;
             }
             catch (SqlException e)
             {
@@ -47,23 +47,34 @@ namespace PetView
                 con.Close();
             }
         }
-
         string tempo;
-
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            if (cboDono.Text == "" || txtEspecie.Text == "" || txtNomeAnimal.Text == "" || txtRaca.Text == "" || nupIdade.Value == 0 || rtxtDescricao.Text == "" || (!rbAnos.Checked && !rbMeses.Checked))
+            if (String.IsNullOrWhiteSpace(txtNomeAnimal.Text) ||
+               String.IsNullOrWhiteSpace(nupIdade.Text) ||
+               String.IsNullOrWhiteSpace(txtEspecie.Text) ||
+               String.IsNullOrWhiteSpace(txtRaca.Text) ||
+               String.IsNullOrWhiteSpace(rtxtDescricao.Text) ||
+               cboDono.Text == "" || (!rbAnos.Checked && !rbMeses.Checked))
             {
                 MessageBox.Show("Preencha todos os campos requeridos.", "Não foi possível criar um novo registro.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                if (rbAnos.Checked)
-                    tempo = "Anos";
-                else
-                    tempo = "Meses";
-                Animal animal = new Animal(Convert.ToInt16(txtRGA.Text), txtNomeAnimal.Text, Convert.ToInt16(nupIdade.Text), tempo, txtEspecie.Text, txtRaca.Text, rtxtDescricao.Text, Convert.ToInt16(cboDono.SelectedValue));
-                animal.Insert();
+                try
+                {
+                    if (rbAnos.Checked)
+                        tempo = "Anos";
+                    else
+                        tempo = "Meses";
+
+                    var animal = new Animal(NullableObjs.ToNullableInt(txtRGA.Text), txtNomeAnimal.Text, Convert.ToInt16(nupIdade.Text), tempo, txtEspecie.Text, txtRaca.Text, rtxtDescricao.Text, Convert.ToInt16(cboDono.SelectedValue));
+                    animal.Insert();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

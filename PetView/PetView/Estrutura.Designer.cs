@@ -30,7 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlSeguidora = new System.Windows.Forms.Panel();
-            this.lblNomeFunc = new System.Windows.Forms.Label();
             this.lblBemVindo = new System.Windows.Forms.Label();
             this.btnConsulta = new System.Windows.Forms.Button();
             this.btnExame = new System.Windows.Forms.Button();
@@ -64,7 +63,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkRed;
             this.panel1.Controls.Add(this.pnlSeguidora);
-            this.panel1.Controls.Add(this.lblNomeFunc);
             this.panel1.Controls.Add(this.lblBemVindo);
             this.panel1.Controls.Add(this.btnConsulta);
             this.panel1.Controls.Add(this.btnExame);
@@ -94,19 +92,6 @@
             this.pnlSeguidora.TabIndex = 9;
             this.pnlSeguidora.Visible = false;
             // 
-            // lblNomeFunc
-            // 
-            this.lblNomeFunc.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblNomeFunc.Font = new System.Drawing.Font("Calibri", 14.25F);
-            this.lblNomeFunc.ForeColor = System.Drawing.Color.AntiqueWhite;
-            this.lblNomeFunc.Location = new System.Drawing.Point(0, 58);
-            this.lblNomeFunc.Name = "lblNomeFunc";
-            this.lblNomeFunc.Padding = new System.Windows.Forms.Padding(5);
-            this.lblNomeFunc.Size = new System.Drawing.Size(261, 70);
-            this.lblNomeFunc.TabIndex = 15;
-            this.lblNomeFunc.Text = "[Nome do funcionário]";
-            this.lblNomeFunc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lblBemVindo
             // 
             this.lblBemVindo.Dock = System.Windows.Forms.DockStyle.Top;
@@ -115,7 +100,7 @@
             this.lblBemVindo.Location = new System.Drawing.Point(0, 0);
             this.lblBemVindo.Name = "lblBemVindo";
             this.lblBemVindo.Padding = new System.Windows.Forms.Padding(5, 20, 5, 5);
-            this.lblBemVindo.Size = new System.Drawing.Size(261, 58);
+            this.lblBemVindo.Size = new System.Drawing.Size(261, 161);
             this.lblBemVindo.TabIndex = 8;
             this.lblBemVindo.Text = "Bem vindo(a)!";
             this.lblBemVindo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -413,7 +398,7 @@
             // formDono1
             // 
             this.formDono1.Location = new System.Drawing.Point(304, 771);
-            this.formDono1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.formDono1.Margin = new System.Windows.Forms.Padding(4);
             this.formDono1.Name = "formDono1";
             this.formDono1.Size = new System.Drawing.Size(385, 133);
             this.formDono1.TabIndex = 7;
@@ -431,7 +416,7 @@
             // formMedico1
             // 
             this.formMedico1.Location = new System.Drawing.Point(303, 472);
-            this.formMedico1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.formMedico1.Margin = new System.Windows.Forms.Padding(4);
             this.formMedico1.Name = "formMedico1";
             this.formMedico1.Size = new System.Drawing.Size(386, 98);
             this.formMedico1.TabIndex = 5;
@@ -440,7 +425,7 @@
             // formFuncionario1
             // 
             this.formFuncionario1.Location = new System.Drawing.Point(304, 345);
-            this.formFuncionario1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.formFuncionario1.Margin = new System.Windows.Forms.Padding(4);
             this.formFuncionario1.Name = "formFuncionario1";
             this.formFuncionario1.Size = new System.Drawing.Size(385, 91);
             this.formFuncionario1.TabIndex = 4;
@@ -449,7 +434,7 @@
             // formAnimal1
             // 
             this.formAnimal1.Location = new System.Drawing.Point(304, 210);
-            this.formAnimal1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.formAnimal1.Margin = new System.Windows.Forms.Padding(4);
             this.formAnimal1.Name = "formAnimal1";
             this.formAnimal1.Size = new System.Drawing.Size(385, 89);
             this.formAnimal1.TabIndex = 3;
@@ -541,7 +526,6 @@
         private System.Windows.Forms.Button btnTratamento;
         private System.Windows.Forms.Button btnConsulta;
         private System.Windows.Forms.Button btnExame;
-        private System.Windows.Forms.Label lblNomeFunc;
         private System.Windows.Forms.Label lblBemVindo;
         private FormAgenda formAgenda1;
         private System.Windows.Forms.Panel pnlSeguidora;

@@ -75,7 +75,7 @@ cpf_dono char(11) not null,
 rg_dono char(9) not null,
 cel_dono char(11) not null,
 tel_dono char(10),
-email_dono varchar(100) not null,
+email_dono varchar(100),
 cep_dono char(8) not null,
 numcasa_dono int not null,
 constraint FK_tbDono_tbEndereco foreign key(cep_dono, numcasa_dono) references tbEndereco(cep,numero)
@@ -165,13 +165,12 @@ create proc sp_insert_medico(
 ) 
 as 
 	begin
-		if(@tel_med = '') set @tel_med = null;
-		if(@complemento = '')set @complemento = 'Sem complemento';
+		if(@complemento = null) set @complemento = 'Sem complemento';
 
 		insert into tbEndereco (cep, numero, rua, bairro, complemento, cidade, uf)
 				values (@cep, @numero, @rua, @bairro, @complemento, @cidade, @uf);
-		insert into tbMedico(crmv, nome_med, funcao_med, cpf_med, rg_med, cel_med, tel_med, salario_med, cep_med, numcasa_med)
-				values(@crmv, @nome_med, @funcao_med, @cpf_med, @rg_med, @cel_med, @tel_med, @salario_med, @cep, @numero);
+		insert into tbMedico(crmv, nome_med, funcao_med, cpf_med, rg_med, cel_med, tel_med, email_med, salario_med, cep_med, numcasa_med)
+				values(@crmv, @nome_med, @funcao_med, @cpf_med, @rg_med, @cel_med, @tel_med, @email_med, @salario_med, @cep, @numero);
 	end
  GO
 
@@ -255,8 +254,7 @@ create proc sp_insert_func(
 ) 
 as 
 	begin
-		if(@tel_func = '') set @tel_func = null;
-		if(@complemento = '')set @complemento = 'Sem complemento';
+		if(@complemento = null)set @complemento = 'Sem complemento';
 
 		insert into tbEndereco (cep, numero, rua, bairro, complemento, cidade, uf)
 				values (@cep, @numero, @rua, @bairro, @complemento, @cidade, @uf);
@@ -329,20 +327,19 @@ create proc sp_insert_dono(
 @numero int,
 @rua varchar(50),
 @bairro varchar(50),
-@complemento varchar(20),
+@complemento varchar(20) = null,
 @cidade varchar(50),	
 @uf char(2),
 @nome_dono varchar(70),
 @cpf_dono char(11),
 @rg_dono char(9),
-@tel_dono char(10),
+@tel_dono char(10) = null,
 @cel_dono char(11),
 @email_dono varchar(100)
 ) 
 as 
 	begin
-		if(@tel_dono = '') set @tel_dono = null;
-		if(@complemento = '')set @complemento = 'Sem complemento';
+		if(@complemento = null)set @complemento = 'Sem complemento';
 
 		insert into tbEndereco (cep, numero, rua, bairro, complemento, cidade, uf)
 				values (@cep, @numero, @rua, @bairro, @complemento, @cidade, @uf);
@@ -378,18 +375,18 @@ end
 GO
 
 create proc sp_select_dono(
-@cod_dono int,
-@nome_dono varchar(70),
-@cpf_dono char(11),
-@rg_dono char(9),
-@tel_dono char(10),
-@cel_dono char(11),
-@email_dono varchar(100)
+@cod_dono int = null,
+@nome_dono varchar(70) = null,
+@cpf_dono char(11) = null,
+@rg_dono char(9) = null,
+@tel_dono char(10) = null,
+@cel_dono char(11) = null,
+@email_dono varchar(100) = null
 )
 as
 begin
 	select D.cod_dono [ID], D.nome_dono [Nome], D.cpf_dono [CPF], D.rg_dono [RG], D.cel_dono [Celular], D.tel_dono [Telefone], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbDono D
-	inner join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
+	left join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
 	where D.cod_dono = @cod_dono or D.nome_dono = @nome_dono or D.cpf_dono = @cpf_dono or D.rg_dono = @rg_dono or D.cel_dono = @cel_dono or D.tel_dono = @tel_dono or D.email_dono = @email_dono;
 end
 GO
@@ -623,11 +620,14 @@ GO
 update tbUsuario set ativacao_usuario = 0 where cod_usuario = 1
 GO
 
-exec sp_select_usuario_ativo
+exec sp_insert_medico '34647384', 12, 'a', 'b', null, 'a', 'ff', 33333, 'Roberta', 'a', '733774584', '33333333', '3333333', '44444', 'aa', 34344
 GO
 
-UPDATE tbUsuario SET ativacao_usuario = 1 WHERE nome_usuario = 'nome' and senha_usuario = 'senha'
+exec sp_insert_usuario 'med', 'senha', null, 1
 GO
 
-select*from tbUsuario
+update tbUsuario set ativacao_usuario = 0 where cod_usuario = 2
+GO
+
+exec sp_insert_dono 07856999, 23, 'a', 's', 'a', 'a', 'aa', 'Danoninho 1', '73466377722', '564738372', '222222', '32222', 'sssssssssss'
 GO

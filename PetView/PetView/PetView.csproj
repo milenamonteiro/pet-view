@@ -106,6 +106,7 @@
     <Compile Include="Medico\FormConsulta.Designer.cs">
       <DependentUpon>FormConsulta.cs</DependentUpon>
     </Compile>
+    <Compile Include="NullableObjs.cs" />
     <Compile Include="Principais\FormAgenda.cs">
       <SubType>UserControl</SubType>
     </Compile>

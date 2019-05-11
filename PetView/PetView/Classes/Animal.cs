@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace PetView
 {
-    public class Animal : ICadastro
+    public class Animal
     {
         public int CodigoAnimal { get; set; }
-        public int RGA { get; set; }
+        public int? RGA { get; set; }
         public String NomeAnimal { get; set; }
         public int IdadeAnimal { get; set; }
         public String Tempo { get; set; }
@@ -22,17 +22,16 @@ namespace PetView
         public String Descricao { get; set; }
         public Dono dono { get; set; }
 
-        public Animal() { }
-
-        public Animal(int rGA, string nomeAnimal, int idadeAnimal, string tempo, string especie, string raca, string descricao, int codDono)
+        public Animal(int? rGA, String nomeAnimal, int idadeAnimal, String tempo, String especie, String raca, String descricao, int codDono)
         {
-            RGA = rGA;
-            NomeAnimal = nomeAnimal;
-            IdadeAnimal = idadeAnimal;
-            Tempo = tempo;
-            Especie = especie;
-            Raca = raca;
-            Descricao = descricao;
+            dono = new Dono();
+            this.RGA = rGA;
+            this.NomeAnimal = nomeAnimal;
+            this.IdadeAnimal = idadeAnimal;
+            this.Tempo = tempo;
+            this.Especie = especie;
+            this.Raca = raca;
+            this.Descricao = descricao;
             dono.CodigoDono = codDono;
         }
 

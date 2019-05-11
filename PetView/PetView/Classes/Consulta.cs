@@ -18,6 +18,17 @@ namespace PetView
         public String TipoConsulta { get; set; }
         public DateTime DataConsulta { get; set; }
 
+        public Consulta(int codConsulta, string sintomas, string diagnostico, string observacao, double custo, string tipoConsulta, DateTime dataConsulta)
+        {
+            CodConsulta = codConsulta;
+            Sintomas = sintomas;
+            Diagnostico = diagnostico;
+            Observacao = observacao;
+            Custo = custo;
+            TipoConsulta = tipoConsulta;
+            DataConsulta = dataConsulta;
+        }
+
         public void Delete()
         {
             throw new NotImplementedException();

@@ -43,14 +43,14 @@ namespace PetView
                     {
                         if (!reader.IsDBNull(1))
                         {
-                            lblNomeFunc.Text = reader["nome_func"].ToString();
+                            lblBemVindo.Text = "Bem vindo(a)!  \n \n" + reader["nome_func"].ToString();
                             reader.Close();
                             List<Button> list = new List<Button> { btnConsulta, btnExame, btnTratamento };
                             list.ForEach(item => item.Visible = false);
                         }
                         else
                         {
-                            lblNomeFunc.Text = reader["nome_med"].ToString();
+                            lblBemVindo.Text = "Bem vindo(a)! \n \n" + reader["nome_med"].ToString();
                             reader.Close();
                             List<Button> list = new List<Button> { btnAgendamento, btnCadastro, btnRegistros };
                             list.ForEach(item => item.Visible = false);

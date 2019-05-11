@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PetView
 {
@@ -12,15 +14,18 @@ namespace PetView
     {
         public int CodigoDono { get; set; }
         public String NomeDono { get; set; }
-        public char CPFDono { get; set; }
-        public char RGDono { get; set; }
-        public char CelDono { get; set; }
-        public char TelDono { get; set; }
+        public String CPFDono { get; set; }
+        public String RGDono { get; set; }
+        public String CelDono { get; set; }
+        public String TelDono { get; set; }
         public String EmailDono { get; set; }
         public Endereco endereco { get; set; }
 
-        public Dono(string nomeDono, char cPFDono, char rGDono, char celDono, char telDono, string emailDono, string cep, string bairro, string cidade, string complemento, int numcasa, string rua, string uf)
+        public Dono() { }
+
+        public Dono(string nomeDono, string cPFDono, string rGDono, string celDono, string telDono, string emailDono, string cep, string bairro, string cidade, string complemento, int numcasa, string rua, string uf)
         {
+            endereco = new Endereco();
             NomeDono = nomeDono;
             CPFDono = cPFDono;
             RGDono = rGDono;
@@ -40,17 +45,31 @@ namespace PetView
         {
             SqlConnection con = new SqlConnection(StringConexao.connectionString);
 
-            SqlCommand cmd = new SqlCommand("sp_insert_animal", con);
+            SqlCommand cmd = new SqlCommand("sp_insert_dono", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@rga", SqlDbType.Int).Value = (object)RGA ?? DBNull.Value;
-            cmd.Parameters.Add("@cod_dono", SqlDbType.Int).Value = dono.CodigoDono;
-            cmd.Parameters.Add("@nome_animal", SqlDbType.VarChar).Value = NomeAnimal;
-            cmd.Parameters.Add("@idade", SqlDbType.Int).Value = IdadeAnimal;
-            cmd.Parameters.Add("@tipo_idade", SqlDbType.VarChar).Value = Tempo;
-            cmd.Parameters.Add("@raca_animal", SqlDbType.VarChar).Value = Raca;
-            cmd.Parameters.Add("@especie", SqlDbType.VarChar).Value = Especie;
-            cmd.Parameters.Add("@descricao", SqlDbType.VarChar).Value = Descricao;
+            cmd.Parameters.Add("@cep", SqlDbType.Char).Value = endereco.CEP;
+            cmd.Parameters.Add("@numero", SqlDbType.Int).Value = endereco.NumCasa;
+            cmd.Parameters.Add("@rua", SqlDbType.VarChar).Value = endereco.Rua;
+            cmd.Parameters.Add("@bairro", SqlDbType.VarChar).Value = endereco.Bairro;
+            if (string.IsNullOrWhiteSpace(endereco.Complemento))
+                cmd.Parameters.Add("@complemento", SqlDbType.VarChar).Value = SqlString.Null;
+            else
+                cmd.Parameters.Add("@complemento", SqlDbType.VarChar).Value = endereco.Complemento;
+            cmd.Parameters.Add("@cidade", SqlDbType.VarChar).Value = endereco.Cidade;
+            cmd.Parameters.Add("@uf", SqlDbType.Char).Value = endereco.UF;
+            cmd.Parameters.Add("@nome_dono", SqlDbType.VarChar).Value = NomeDono;
+            cmd.Parameters.Add("@cpf_dono", SqlDbType.Char).Value = CPFDono;
+            cmd.Parameters.Add("@rg_dono", SqlDbType.Char).Value = RGDono;
+            if (string.IsNullOrWhiteSpace(TelDono))
+                cmd.Parameters.Add("@tel_dono", SqlDbType.Char).Value = SqlString.Null;
+            else
+                cmd.Parameters.Add("@tel_dono", SqlDbType.Char).Value = TelDono;
+            cmd.Parameters.Add("@cel_dono", SqlDbType.Char).Value = CelDono;
+            if (string.IsNullOrWhiteSpace(EmailDono))
+                cmd.Parameters.Add("@email_dono", SqlDbType.VarChar).Value = SqlString.Null;
+            else
+                cmd.Parameters.Add("@email_dono", SqlDbType.VarChar).Value = EmailDono;
 
             con.Open();
 
@@ -59,7 +78,7 @@ namespace PetView
                 int i = cmd.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    MessageBox.Show("Animal registrado com sucesso!", "Cadastro finalizado.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Dono registrado com sucesso!", "Cadastro finalizado.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (SqlException e)
