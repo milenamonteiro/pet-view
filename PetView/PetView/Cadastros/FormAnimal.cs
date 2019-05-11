@@ -22,7 +22,7 @@ namespace PetView
         void CarregarDono()
         {
             SqlConnection con = new SqlConnection(StringConexao.connectionString);
-            SqlCommand cmd = new SqlCommand("SELECT cod_dono as [Codigo], nome_dono as [Dono] from tbDono", con);
+            SqlCommand cmd = new SqlCommand("SELECT cod_dono as [Codigo], CONCAT(nome_dono, ', CPF: ', cpf_dono) as [Dono] from tbDono", con);
             SqlDataReader reader;
             con.Open();
             try

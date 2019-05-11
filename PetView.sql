@@ -25,7 +25,7 @@ cpf_func char(11) not null,
 rg_func char(9) not null,
 status_func char(8) not null constraint DF_tbFuncionario_status default 'Ativo', -- ativo ou demitido
 tel_func char(10),
-cel_func char(11),
+cel_func char(11) not null,
 email_func varchar(100),
 cargo_func varchar(30) not null,
 salario_func money not null,
@@ -172,7 +172,7 @@ as
 		insert into tbMedico(crmv, nome_med, funcao_med, cpf_med, rg_med, cel_med, tel_med, email_med, salario_med, cep_med, numcasa_med)
 				values(@crmv, @nome_med, @funcao_med, @cpf_med, @rg_med, @cel_med, @tel_med, @email_med, @salario_med, @cep, @numero);
 	end
- GO
+GO
 
 create proc sp_delete_medico(
 @cod_medico int
@@ -213,23 +213,103 @@ end
 GO
 
 create proc sp_select_medico(
-@cod_medico int,
-@crmv int,
-@nome_med char(70),
-@funcao_med varchar(30),
-@cpf_med char(11),
-@rg_med char(9),
-@cel_med char(10),
-@tel_med char(10),
-@email_med  varchar(100),
-@status_med char(8),
-@salario_med money 
+@cod_medico int = null,
+@crmv int = null,
+@nome_med varchar(70) = null,
+@funcao_med varchar(30) = null,
+@cpf_med varchar(11) = null,
+@rg_med varchar(9) = null,
+@cel_med varchar(10) = null,
+@tel_med varchar(10) = null,
+@email_med  varchar(100) = null,
+@status_med varchar(8) = null,
+@salario_med money = null
 )
 as
 begin
-select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbMedico M
-inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
-where M.cod_medico = @cod_medico or M.crmv = @crmv or M.nome_med = @nome_med or M.funcao_med = @funcao_med or M.cpf_med = @cpf_med or M.rg_med = @rg_med or M.cel_med = @cel_med or M.tel_med = @tel_med or M.email_med = @email_med or M.status_med = @status_med or M.salario_med = @salario_med;
+
+if (@cod_medico is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.cod_medico like @cod_medico;
+end
+
+else if (@crmv is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.crmv like @crmv;
+end
+
+else if (@nome_med is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.nome_med like concat('%',@nome_med,'%');
+end
+
+else if (@funcao_med is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.funcao_med like concat('%',@funcao_med,'%');
+end
+
+else if (@cpf_med is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.cpf_med like concat('%',@cpf_med,'%');
+end
+
+else if (@rg_med is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.rg_med like concat('%',@rg_med,'%');
+end
+
+else if (@cel_med is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.cel_med like concat('%',@cel_med,'%');
+end
+
+else if (@tel_med is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.tel_med like concat('%',@tel_med,'%');
+end
+
+else if (@email_med is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.email_med like concat('%',@email_med,'%');
+end
+
+else if (@status_med is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.status_med like concat('%',@status_med,'%');
+end
+
+else if (@salario_med is not null) begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero
+	where M.salario_med like @salario_med;
+end
+
+else begin
+	select M.cod_medico [ID], M.crmv [CRMV], M.nome_med [Nome], M.funcao_med [Função], M.cpf_med [CPF], M.rg_med [RG], M.cel_med [Celular], M.tel_med [Telefone], M.email_med [Email], M.status_med [Status], M.salario_med [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF]
+	from tbMedico M
+	inner join tbEndereco E on M.cep_med = E.cep and M.numcasa_med = E.numero;
+end
 end
 GO
 
@@ -254,14 +334,14 @@ create proc sp_insert_func(
 ) 
 as 
 	begin
-		if(@complemento = null)set @complemento = 'Sem complemento';
+		if(@complemento = null) set @complemento = 'Sem complemento';
 
 		insert into tbEndereco (cep, numero, rua, bairro, complemento, cidade, uf)
 				values (@cep, @numero, @rua, @bairro, @complemento, @cidade, @uf);
 		insert into tbFuncionario(nome_func, cpf_func, rg_func, tel_func, cel_func, email_func, cargo_func, salario_func, cep_func, numcasa_func)
 			values(@nome_func, @cpf_func, @rg_func, @tel_func, @cel_func, @email_func, @cargo_func, @salario_func, @cep, @numero)
 	end
- GO
+GO
 
 create proc sp_delete_func(
 @cod_func int
@@ -301,22 +381,83 @@ end
 GO
 
 create proc sp_select_func(
-@cod_funcionario int,
-@nome_func varchar(70),
-@cpf_func char(11),
-@rg_func char(9),
-@status_func char(8),
-@tel_func char(10),
-@cel_func char(11),
-@email_func varchar(100),
-@cargo_func varchar(30),
-@salario_func money
+@cod_funcionario int = null,
+@nome_func varchar(70) = null,
+@cpf_func varchar(11) = null,
+@rg_func varchar(9) = null,
+@status_func varchar(8) = null,
+@tel_func varchar(10) = null,
+@cel_func varchar(11) = null,
+@email_func varchar(100) = null,
+@cargo_func varchar(30) = null,
+@salario_func money = null
 )
 as
 begin
+if (@cod_funcionario is not null) begin
 	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
 	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
-	where F.cod_funcionario = @cod_funcionario or F.nome_func = @nome_func or F.cargo_func = @cargo_func or F.cpf_func = @cpf_func or F.rg_func = @rg_func or F.cel_func = @cel_func or F.tel_func = @tel_func or F.email_func = @email_func or F.salario_func = @salario_func;
+	where cod_funcionario like @cod_funcionario;
+end
+
+else if (@nome_func is not null) begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
+	where F.nome_func like CONCAT('%',@nome_func,'%');
+end
+
+else if (@cpf_func is not null) begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
+	where F.cpf_func like CONCAT('%',@cpf_func,'%');
+end
+
+else if (@rg_func is not null) begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
+	where F.rg_func like CONCAT('%',@rg_func,'%');
+end
+
+else if (@status_func is not null) begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
+	where F.status_func like CONCAT('%',@status_func,'%');
+end
+
+else if (@tel_func is not null) begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
+	where F.tel_func like CONCAT('%',@tel_func,'%');
+end
+
+else if (@cel_func is not null) begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
+	where F.cel_func like CONCAT('%',@cel_func,'%');
+end
+
+else if (@email_func is not null) begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
+	where F.email_func like CONCAT('%',@email_func,'%');
+end
+
+else if (@cargo_func is not null) begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
+	where F.cargo_func like CONCAT('%',@cargo_func,'%');
+end
+
+else if (@salario_func is not null) begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero
+	where F.salario_func like @salario_func;
+end
+
+else begin
+	select F.cod_funcionario [ID], F.nome_func [Nome], F.cargo_func [Cargo], F.cpf_func [CPF], F.rg_func [RG], F.cel_func [Celular], F.tel_func [Telefone], F.salario_func [Salário], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbFuncionario F
+	inner join tbEndereco E on F.cep_func = E.cep and F.numcasa_func = E.numero;
+end
 end
 GO
 
@@ -346,7 +487,8 @@ as
 		insert into tbDono (nome_dono, cpf_dono, rg_dono, tel_dono, cel_dono, email_dono, cep_dono, numcasa_dono)
 			values(@nome_dono, @cpf_dono, @rg_dono, @tel_dono, @cel_dono, @email_dono, @cep, @numero)
 	end
- GO
+ 
+GO
 
 create proc sp_update_dono(
 @cod_dono int,
@@ -377,17 +519,60 @@ GO
 create proc sp_select_dono(
 @cod_dono int = null,
 @nome_dono varchar(70) = null,
-@cpf_dono char(11) = null,
-@rg_dono char(9) = null,
-@tel_dono char(10) = null,
-@cel_dono char(11) = null,
+@cpf_dono varchar(11) = null,
+@rg_dono varchar(9) = null,
+@tel_dono varchar(10) = null,
+@cel_dono varchar(11) = null,
 @email_dono varchar(100) = null
 )
 as
 begin
+if (@cod_dono is not null) begin
 	select D.cod_dono [ID], D.nome_dono [Nome], D.cpf_dono [CPF], D.rg_dono [RG], D.cel_dono [Celular], D.tel_dono [Telefone], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbDono D
-	left join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
-	where D.cod_dono = @cod_dono or D.nome_dono = @nome_dono or D.cpf_dono = @cpf_dono or D.rg_dono = @rg_dono or D.cel_dono = @cel_dono or D.tel_dono = @tel_dono or D.email_dono = @email_dono;
+	inner join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
+	where D.cod_dono like @cod_dono;
+end
+
+else if (@nome_dono is not null) begin
+	select D.cod_dono [ID], D.nome_dono [Nome], D.cpf_dono [CPF], D.rg_dono [RG], D.cel_dono [Celular], D.tel_dono [Telefone], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbDono D
+	inner join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
+	where D.nome_dono like concat('%',@nome_dono,'%');
+end
+
+else if (@cpf_dono is not null) begin
+	select D.cod_dono [ID], D.nome_dono [Nome], D.cpf_dono [CPF], D.rg_dono [RG], D.cel_dono [Celular], D.tel_dono [Telefone], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbDono D
+	inner join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
+	where D.cpf_dono like concat('%',@cpf_dono,'%');
+end
+
+else if (@rg_dono is not null) begin
+	select D.cod_dono [ID], D.nome_dono [Nome], D.cpf_dono [CPF], D.rg_dono [RG], D.cel_dono [Celular], D.tel_dono [Telefone], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbDono D
+	inner join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
+	where D.rg_dono like concat('%',@rg_dono,'%');
+end
+
+else if (@tel_dono is not null) begin
+	select D.cod_dono [ID], D.nome_dono [Nome], D.cpf_dono [CPF], D.rg_dono [RG], D.cel_dono [Celular], D.tel_dono [Telefone], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbDono D
+	inner join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
+	where D.tel_dono like concat('%',@tel_dono,'%');
+end
+
+else if (@cel_dono is not null) begin
+	select D.cod_dono [ID], D.nome_dono [Nome], D.cpf_dono [CPF], D.rg_dono [RG], D.cel_dono [Celular], D.tel_dono [Telefone], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbDono D
+	inner join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
+	where D.cel_dono like concat('%',@cel_dono,'%');
+end
+
+else if (@email_dono is not null) begin
+	select D.cod_dono [ID], D.nome_dono [Nome], D.cpf_dono [CPF], D.rg_dono [RG], D.cel_dono [Celular], D.tel_dono [Telefone], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbDono D
+	inner join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero
+	where D.email_dono like concat('%',@email_dono,'%');
+end
+
+else begin 
+	select D.cod_dono [ID], D.nome_dono [Nome], D.cpf_dono [CPF], D.rg_dono [RG], D.cel_dono [Celular], D.tel_dono [Telefone], E.cep [CEP], E.rua [Rua], E.numero [Número], E.complemento [Complemento], E.bairro [Bairro], E.cidade [Cidade], E.uf [UF] from tbDono D
+	inner join tbEndereco E on D.cep_dono = E.cep and D.numcasa_dono = E.numero;
+end
 end
 GO
 
@@ -408,7 +593,7 @@ as
 		insert into tbAnimal (rga, cod_dono, nome_animal, idade, tipo_idade, raca_animal, especie, descricao)
 			values(@rga, @cod_dono, @nome_animal, @idade, @tipo_idade, @raca_animal, @especie, @descricao)
 	end
- GO
+GO
 
 create proc sp_update_animal(
 @cod_animal int,
@@ -428,20 +613,69 @@ end
 GO
 
 create proc sp_select_animal(
-@cod_animal int,
-@rga int,
-@nome_dono varchar(70),
-@nome_animal varchar(70),
-@idade int,
-@raca_animal varchar(30),
-@especie varchar(30),
-@descricao varchar(100)
+@cod_animal int = null,
+@rga int = null,
+@nome_dono varchar(70) = null,
+@nome_animal varchar(70) = null,
+@idade int = null,
+@raca_animal varchar(30) = null,
+@especie varchar(30) = null,
+@descricao varchar(100) = null
 )
 as
 begin
-	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], A.idade [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
+if (@cod_animal is not null) begin
+	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], concat(A.idade, ' ', A.tipo_idade) [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
 	inner join tbDono D on A.cod_dono = D.cod_dono
-	where A.cod_animal = @cod_animal or A.nome_animal = @nome_animal or A.cod_dono = (select nome_dono from tbDono inner join tbAnimal on tbAnimal.cod_dono = tbDono.cod_dono where D.nome_dono = @nome_dono) or A.idade = @idade or A.raca_animal = @raca_animal or A.especie = @especie or A.descricao = @descricao;
+	where A.cod_animal like @cod_animal;
+end
+
+else if (@rga is not null) begin
+	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], concat(A.idade, ' ', A.tipo_idade) [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
+	inner join tbDono D on A.cod_dono = D.cod_dono
+	where A.rga like @rga;
+end
+
+else if (@nome_dono is not null) begin
+	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], concat(A.idade, ' ', A.tipo_idade) [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
+	inner join tbDono D on A.cod_dono = D.cod_dono
+	where D.nome_dono like CONCAT('%',@nome_dono,'%');
+end
+
+else if (@nome_animal is not null) begin
+	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], concat(A.idade, ' ', A.tipo_idade) [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
+	inner join tbDono D on A.cod_dono = D.cod_dono
+	where A.nome_animal like CONCAT('%',@nome_animal,'%');
+end
+
+else if (@idade is not null) begin
+	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], concat(A.idade, ' ', A.tipo_idade) [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
+	inner join tbDono D on A.cod_dono = D.cod_dono
+	where A.idade like @idade;
+end
+
+else if (@raca_animal is not null) begin
+	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], concat(A.idade, ' ', A.tipo_idade) [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
+	inner join tbDono D on A.cod_dono = D.cod_dono
+	where A.raca_animal like CONCAT('%',@raca_animal,'%');
+end
+
+else if (@especie is not null) begin
+	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], concat(A.idade, ' ', A.tipo_idade) [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
+	inner join tbDono D on A.cod_dono = D.cod_dono
+	where A.especie like CONCAT('%',@especie,'%');
+end
+
+else if (@descricao is not null) begin
+	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], concat(A.idade, ' ', A.tipo_idade) [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
+	inner join tbDono D on A.cod_dono = D.cod_dono
+	where A.descricao like CONCAT('%',@descricao,'%');
+end
+
+else begin
+	select A.cod_animal [ID], A.rga [RGA], A.nome_animal [Nome], concat(A.idade, ' ', A.tipo_idade) [Idade], A.raca_animal [Raça], A.especie [Espécie], A.descricao [Descrição], D.nome_dono [Dono], D.cel_dono [Celular], D.tel_dono [Telefone] from tbAnimal A
+	inner join tbDono D on A.cod_dono = D.cod_dono;
+end
 end
 GO
 
@@ -460,25 +694,82 @@ as
 		insert into tbConsulta (cod_animal, cod_medico, observacao_consulta, custo_consulta, tipo_consulta, data_consulta)
 			values(@cod_animal, @cod_medico, @observacao_consulta, @custo_consulta, @tipo_consulta, @data_consulta)
 	end
- GO
+ 
+GO
 
 create proc sp_select_consulta(
-@cod_animal int,
-@nome_animal varchar(70),
-@cod_medico int,
-@nome_medico varchar(70),
-@nome_dono varchar(70),
-@custo_consulta money,
-@tipo_consulta varchar(15),
-@data_consulta datetime
+@cod_consulta int = null,
+@nome_animal varchar(70) = null,
+@nome_medico varchar(70) = null,
+@nome_dono varchar(70) = null,
+@custo_consulta money = null,
+@tipo_consulta varchar(15) = null,
+@data_consulta datetime = null
 )
 as
 begin
+if (@cod_consulta is not null) begin
 	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
-	where A.cod_animal = @cod_animal or D.nome_dono = @nome_dono or A.nome_animal = @nome_animal or M.nome_med = @nome_medico or C.custo_consulta = @custo_consulta or C.tipo_consulta = @tipo_consulta or C.data_consulta = @data_consulta or M.cod_medico = @cod_medico;
+	where C.cod_consulta like @cod_consulta;
+end
+
+else if (@nome_animal is not null) begin
+	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where A.nome_animal like concat('%',@cod_consulta,'%');
+end
+
+else if (@nome_medico is not null) begin
+	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where M.nome_med like concat('%',@nome_medico,'%');
+end
+
+else if (@nome_dono is not null) begin
+	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where D.nome_dono like concat('%',@nome_dono,'%');
+end
+
+else if (@custo_consulta is not null) begin
+	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where C.custo_consulta like @custo_consulta;
+end
+
+else if (@tipo_consulta is not null) begin
+	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where C.tipo_consulta like concat('%',@tipo_consulta,'%');
+end
+
+else if (@data_consulta is not null) begin
+	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where C.data_consulta like @data_consulta;
+end
+
+else begin
+	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono;
+end
 end
 GO
 
@@ -498,24 +789,81 @@ as
 		insert into tbTratamento(cod_animal, cod_medico, cod_consulta, tipo_tratamento, observacao_tratamento, custo_tratamento, data_tratamento)
 			values (@cod_animal, @cod_medico, @cod_consulta, @tipo_tratamento, @observacao_tratamento, @custo_tratamento, @data_tratamento);
 	end
- GO
+GO
 
 create proc sp_select_tratamento(
-@cod_animal int,
-@nome_animal varchar(70),
-@cod_medico int,
-@nome_medico varchar(70),
-@nome_dono varchar(70),
-@custo_tratamento money,
-@tipo_tratamento varchar(30)
+@cod_tratamento int = null,
+@nome_animal varchar(70) = null,
+@nome_medico varchar(70) = null,
+@nome_dono varchar(70) = null,
+@custo_tratamento money = null,
+@tipo_tratamento varchar(30) = null,
+@data_tratamento datetime = null
 )
 as
 begin
-	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações] from tbTratamento T
+if (@cod_tratamento is not null) begin
+	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
-	where A.cod_animal = @cod_animal or D.nome_dono = @nome_dono or A.nome_animal = @nome_animal or M.nome_med = @nome_medico or T.custo_tratamento = @custo_tratamento or T.tipo_tratamento = @tipo_tratamento or M.cod_medico = @cod_medico;
+	where T.cod_tratamento like @cod_tratamento;
+end
+
+else if (@nome_animal is not null) begin
+	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where A.nome_animal like concat('%',@nome_animal,'%');
+end
+
+else if (@nome_medico is not null) begin
+	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where M.nome_med like concat('%',@nome_medico,'%');
+end
+
+else if (@nome_dono is not null) begin
+	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where D.nome_dono like concat('%',@nome_dono,'%');
+end
+
+else if (@custo_tratamento is not null) begin
+	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where T.custo_tratamento like @custo_tratamento;
+end
+
+else if (@tipo_tratamento is not null) begin
+	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where T.tipo_tratamento like concat('%',@tipo_tratamento,'%');
+end
+
+else if (@data_tratamento is not null) begin
+	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where T.data_tratamento like @data_tratamento;
+end
+
+else begin
+	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono;
+end
 end
 GO
 
@@ -535,25 +883,82 @@ as
 		insert into tbExame(cod_animal, cod_medico, cod_consulta, tipo_exame, observacao_exame, custo_exame, data_exame)
 			values (@cod_animal, @cod_medico, @cod_consulta, @tipo_exame, @observacao_exame, @custo_exame, @data_exame);
 	end
- GO
+ 
+GO
 
 create proc sp_select_exame(
-@cod_animal int,
-@nome_animal varchar(70),
-@cod_medico int,
-@nome_medico varchar(70),
-@nome_dono varchar(70),
-@custo_exame money,
-@tipo_exame varchar(30),
-@data_exame datetime
+@cod_exame int = null,
+@nome_animal varchar(70) = null,
+@nome_medico varchar(70) = null,
+@nome_dono varchar(70) = null,
+@custo_exame money = null,
+@tipo_exame varchar(30) = null,
+@data_exame datetime = null
 )
 as
 begin
+if (@cod_exame is not null) begin
 	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
 	inner join tbAnimal A on A.cod_animal = E.cod_animal
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
-	where A.cod_animal = @cod_animal or D.nome_dono = @nome_dono or A.nome_animal = @nome_animal or M.nome_med = @nome_medico or E.custo_exame = @custo_exame or E.tipo_exame = @tipo_exame or M.cod_medico = @cod_medico or E.data_exame = @data_exame;
+	where E.cod_exame like @cod_exame;
+end
+
+else if (@nome_animal is not null) begin
+	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where A.nome_animal like concat('%',@nome_animal,'%');
+end
+
+else if (@nome_medico is not null) begin
+	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where M.nome_med like concat('%',@nome_medico,'%');
+end
+
+else if (@nome_dono is not null) begin
+	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where D.nome_dono like concat('%',@nome_dono,'%');
+end
+
+else if (@custo_exame is not null) begin
+	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where E.custo_exame like @custo_exame;
+end
+
+else if (@tipo_exame is not null) begin
+	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where E.tipo_exame like concat('%',@tipo_exame,'%');
+end
+
+else if (@custo_exame is not null) begin
+	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	where E.custo_exame like @custo_exame;
+end
+
+else begin
+	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono;
+end
 end
 GO
 
@@ -575,7 +980,7 @@ as
 	else
 		print 'Já existe um usuário com esse nome!'
 	end
- GO
+GO
 
 create proc sp_delete_usuario(
 @cod_usuario int

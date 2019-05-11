@@ -24,6 +24,63 @@ namespace PetView
         public double SalarioMedico { get; set; }
         public Endereco endereco { get; set; }
 
+        public static DataTable Select(String type, String value)
+        {
+            using (SqlConnection con = new SqlConnection(StringConexao.connectionString))
+            {
+                SqlDataAdapter cmd = new SqlDataAdapter("sp_select_func", con);
+                cmd.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                if ("Código".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@cod_medico", SqlDbType.Int).Value = Convert.ToInt32(value);
+                }
+                else if ("CRMV".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@crmv", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Nome".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@nome_func", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Função".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@funcao_med", SqlDbType.VarChar).Value = value;
+                }
+                else if ("CPF".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@cpf_med", SqlDbType.VarChar).Value = value;
+                }
+                else if ("RG".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@rg_med", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Celular".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@cel_med", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Telefone".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@tel_med", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Email".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@email_med", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Status".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@status_med", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Salário".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@salario_med", SqlDbType.Money).Value = Convert.ToDouble(value);
+                }
+                DataTable dtbl = new DataTable();
+                cmd.Fill(dtbl);
+                return dtbl;
+            }
+        }
+
         public Medico(string nomeMedico, string cRMVMedico, string cPFMedico, string rGMedico, string celMedico, string telMedico, string emailMedico, string funcaoMedico, double salarioMedico, string cep, string bairro, string cidade, string complemento, int numcasa, string rua, string uf)
         {
             endereco = new Endereco();

@@ -22,6 +22,8 @@ namespace PetView
         public String Descricao { get; set; }
         public Dono dono { get; set; }
 
+        public Animal() { }
+
         public Animal(int? rGA, String nomeAnimal, int idadeAnimal, String tempo, String especie, String raca, String descricao, int codDono)
         {
             dono = new Dono();
@@ -71,6 +73,51 @@ namespace PetView
                 {
                     con.Close();
                 }
+            }
+        }
+
+        public static DataTable Select(String type, String value)
+        {
+            using (SqlConnection con = new SqlConnection(StringConexao.connectionString))
+            {
+                SqlDataAdapter cmd = new SqlDataAdapter("sp_select_animal", con);
+                cmd.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                if ("RGA".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@rga", SqlDbType.Int).Value = Convert.ToInt32(value);
+                }
+                else if ("Nome do dono".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@nome_dono", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Código".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@cod_animal", SqlDbType.Int).Value = Convert.ToInt32(value);
+                }
+                else if ("Nome do animal".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@nome_animal", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Idade".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@idade", SqlDbType.Int).Value = Convert.ToInt32(value);
+                }
+                else if ("Raça".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@raca_animal", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Espécie".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@especie", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Descrição".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@descricao", SqlDbType.VarChar).Value = value;
+                }
+                DataTable dtbl = new DataTable();
+                cmd.Fill(dtbl);
+                return dtbl;
             }
         }
 

@@ -43,6 +43,59 @@ namespace PetView
             endereco.UF = uf;
         }
 
+        public static DataTable Select(String type, String value)
+        {
+            using (SqlConnection con = new SqlConnection(StringConexao.connectionString))
+            {
+                SqlDataAdapter cmd = new SqlDataAdapter("sp_select_func", con);
+                cmd.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                if ("Código".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@cod_funcionario", SqlDbType.Int).Value = Convert.ToInt32(value);
+                }
+                else if ("Nome".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@nome_func", SqlDbType.VarChar).Value = value;
+                }
+                else if ("CPF".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@cpf_func", SqlDbType.VarChar).Value = value;
+                }
+                else if ("RG".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@rg_func", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Status".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@status_func", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Telefone".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@tel_func", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Celular".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@cel_func", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Email".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@email_func", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Cargo".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@cargo_func", SqlDbType.VarChar).Value = value;
+                }
+                else if ("Salário".Equals(type))
+                {
+                    cmd.SelectCommand.Parameters.Add("@salario_func", SqlDbType.Money).Value = Convert.ToDouble(value);
+                }
+                DataTable dtbl = new DataTable();
+                cmd.Fill(dtbl);
+                return dtbl;
+            }
+        }
+
         public void Insert()
         {
             SqlConnection con = new SqlConnection(StringConexao.connectionString);
