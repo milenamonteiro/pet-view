@@ -21,6 +21,7 @@ namespace PetView
 
         private void CarregarCBOS()
         {
+            cboTipoAgendamento.Items.Clear();
             List<string> tipoagend = new List<string> { "Consulta", "Exame", "Tratamento" };
             tipoagend.ForEach(item => cboTipoAgendamento.Items.Add(item));
             cboTipoAgendamento.SelectedIndex = -1;
@@ -219,6 +220,28 @@ namespace PetView
                     tratamento.Insert();
                 }
             }
+        }
+        
+        private void Limpeza()
+        {
+            CarregarCBOS();
+            nupCusto.Value = 0;
+            rtxtObs.Text = "";
+            cboTipo.SelectedIndex = -1;
+            cboConsulta.SelectedIndex = -1;
+            cboConsulta.Visible = false;
+            lblConsultaAnterior.Visible = false;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+            this.Visible = false;
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
         }
     }
 }

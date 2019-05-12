@@ -57,5 +57,35 @@ namespace PetView
                 }
             }
         }
+
+        private void Limpeza()
+        {
+            CarregaEstado();
+            txtNomeFunc.Text = "";
+            txtEmailFunc.Text = "";
+            txtRGFunc.Text = "";
+            txtCPF.Text = "";
+            txtCelular.Text = "";
+            txtTelefone.Text = "";
+            txtCargoFunc.Text = "";
+            txtEndereco.Text = "";
+            nupSalario.Value = 0;
+            nupNumero.Value = 0;
+            txtComplemento.Text = "";
+            txtBairro.Text = "";
+            txtCidade.Text = "";
+            txtCEP.Text = "";
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Limpeza();
+        }
     }
 }

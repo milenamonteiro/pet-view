@@ -29,6 +29,7 @@ namespace PetView
         string cboTabela_item;
         private void cboTabelas_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txtFiltro.Text = "";
             if (cboTabela_item != cboTabelas.SelectedItem.ToString())
             {
                 cboTabela_item = cboTabelas.SelectedItem.ToString();
@@ -81,14 +82,14 @@ namespace PetView
                     break;
 
                 case "Consulta":
-                    List<string> consulta = new List<string> { "Código", "Nome do animal", "Nome do médico", "Nome do dono", "Custo", "Tipo", "Data" };
+                    List<string> consulta = new List<string> { "Código", "Nome do animal", "Nome do médico", "Nome do dono", "Custo", "Tipo" };
                     consulta.ForEach(item => cboColunas.Items.Add(item));
                     cboColunas.SelectedIndex = -1;
                     dgvTabela("consulta");
                     break;
 
                 case "Exame":
-                    List<string> exame = new List<string> { "Código", "Nome do animal", "Nome do médico", "Nome do dono", "Custo", "Tipo", "Data" };
+                    List<string> exame = new List<string> { "Código", "Nome do animal", "Nome do médico", "Nome do dono", "Custo", "Tipo" };
                     exame.ForEach(item => cboColunas.Items.Add(item));
                     cboColunas.SelectedIndex = -1;
                     dgvTabela("exame");
@@ -109,7 +110,7 @@ namespace PetView
                     break;
 
                 case "Tratamento":
-                    List<string> tratamento = new List<string> { "Código", "Nome do animal", "Nome do médico", "Nome do dono", "Custo", "Tipo", "Data" };
+                    List<string> tratamento = new List<string> { "Código", "Nome do animal", "Nome do médico", "Nome do dono", "Custo", "Tipo" };
                     tratamento.ForEach(item => cboColunas.Items.Add(item));
                     cboColunas.SelectedIndex = -1;
                     dgvTabela("tratamento");
@@ -156,5 +157,10 @@ namespace PetView
             dgvParametros(cboTabelas.SelectedItem.ToString(), cboColunas.SelectedItem.ToString(), txtFiltro.Text);
         }
 
+        private void cboColunas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtFiltro.Text = "";
+            dgvTabela(cboTabelas.Text);
+        }
     }
 }

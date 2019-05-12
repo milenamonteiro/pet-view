@@ -256,5 +256,24 @@ namespace PetView
         {
             CarregaCbos();
         }
+
+        private void Limpeza()
+        {
+            CarregaCbos();
+            CarregaDonos();
+            DadosExame();
+            rtxtObservacoes.Text = "";
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+            this.Visible = false;
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+        }
     }
 }

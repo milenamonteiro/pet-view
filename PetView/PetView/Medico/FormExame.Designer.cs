@@ -37,7 +37,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cboDono = new System.Windows.Forms.ComboBox();
             this.cboExame = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.rtxtObservacoes = new System.Windows.Forms.RichTextBox();
@@ -46,6 +45,7 @@
             this.rtxtDadosAnimal = new System.Windows.Forms.RichTextBox();
             this.rtxtDadosDono = new System.Windows.Forms.RichTextBox();
             this.rtxtDadosExame = new System.Windows.Forms.RichTextBox();
+            this.cboDono = new System.Windows.Forms.ComboBox();
             this.flpBotoes.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -100,6 +100,7 @@
             this.btnCancelar.TabIndex = 16;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnLimpar
             // 
@@ -112,6 +113,7 @@
             this.btnLimpar.TabIndex = 18;
             this.btnLimpar.Text = "Limpar";
             this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -179,18 +181,6 @@
             this.label3.Size = new System.Drawing.Size(186, 27);
             this.label3.TabIndex = 2;
             this.label3.Text = "Dados do animal";
-            // 
-            // cboDono
-            // 
-            this.cboDono.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cboDono.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDono.Font = new System.Drawing.Font("Calibri", 13F);
-            this.cboDono.FormattingEnabled = true;
-            this.cboDono.Location = new System.Drawing.Point(1036, 26);
-            this.cboDono.Name = "cboDono";
-            this.cboDono.Size = new System.Drawing.Size(488, 35);
-            this.cboDono.TabIndex = 11;
-            this.cboDono.TextChanged += new System.EventHandler(this.cboDono_TextChanged);
             // 
             // cboExame
             // 
@@ -288,6 +278,18 @@
             this.rtxtDadosExame.Size = new System.Drawing.Size(489, 303);
             this.rtxtDadosExame.TabIndex = 23;
             this.rtxtDadosExame.Text = "";
+            // 
+            // cboDono
+            // 
+            this.cboDono.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboDono.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDono.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboDono.FormattingEnabled = true;
+            this.cboDono.Location = new System.Drawing.Point(1036, 26);
+            this.cboDono.Name = "cboDono";
+            this.cboDono.Size = new System.Drawing.Size(488, 35);
+            this.cboDono.TabIndex = 11;
+            this.cboDono.TextChanged += new System.EventHandler(this.cboDono_TextChanged);
             // 
             // FormExame
             // 

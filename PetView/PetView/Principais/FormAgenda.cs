@@ -105,7 +105,12 @@ namespace PetView
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
+            tipo = "";
+            medico = null;
+            datainicial = "";
+            datafinal = "";
             CarregaMedico();
+            dgvParametros(tipo, "");
         }
     }
 }

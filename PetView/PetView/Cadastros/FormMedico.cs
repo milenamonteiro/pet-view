@@ -59,5 +59,36 @@ namespace PetView
                 }
             }
         }
+
+        private void Limpeza()
+        {
+            CarregaEstado();
+            txtNomeMedico.Text = "";
+            txtEmailMedico.Text = "";
+            txtRGMedico.Text = "";
+            txtCPF.Text = "";
+            txtCelular.Text = "";
+            txtTelefone.Text = "";
+            txtCRMV.Text = "";
+            txtFuncaoMedico.Text = "";
+            txtEndereco.Text = "";
+            nupSalarioMedico.Value = 0;
+            nupNumero.Value = 0;
+            txtComplemento.Text = "";
+            txtBairro.Text = "";
+            txtCidade.Text = "";
+            txtCEP.Text = "";
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+            this.Visible = false;
+        }
     }
 }

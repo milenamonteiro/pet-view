@@ -265,5 +265,26 @@ namespace PetView
         {
             DadosConsulta();
         }
+
+        private void Limpeza()
+        {
+            CarregaCbos();
+            CarregaDonos();
+            DadosConsulta();
+            rtxtObservacoes.Text = "";
+            rtxtSintomas.Text = "";
+            rtxtDadosDiagnostico.Text = "";
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+            this.Visible = false;
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+        }
     }
 }

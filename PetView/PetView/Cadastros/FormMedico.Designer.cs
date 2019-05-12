@@ -59,8 +59,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtCEP = new System.Windows.Forms.MaskedTextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.txtBairro = new System.Windows.Forms.TextBox();
             this.cboUF = new System.Windows.Forms.ComboBox();
+            this.txtBairro = new System.Windows.Forms.TextBox();
             this.flpBotoes = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -348,6 +348,7 @@
             // nupSalarioMedico
             // 
             this.nupSalarioMedico.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nupSalarioMedico.DecimalPlaces = 2;
             this.nupSalarioMedico.Font = new System.Drawing.Font("Calibri", 13F);
             this.nupSalarioMedico.Location = new System.Drawing.Point(365, 301);
             this.nupSalarioMedico.Margin = new System.Windows.Forms.Padding(4);
@@ -517,17 +518,6 @@
             this.label12.Text = "Bairro: *";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtBairro
-            // 
-            this.txtBairro.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtBairro.Font = new System.Drawing.Font("Calibri", 13F);
-            this.txtBairro.Location = new System.Drawing.Point(1132, 505);
-            this.txtBairro.Margin = new System.Windows.Forms.Padding(4);
-            this.txtBairro.MaxLength = 50;
-            this.txtBairro.Name = "txtBairro";
-            this.txtBairro.Size = new System.Drawing.Size(367, 34);
-            this.txtBairro.TabIndex = 16;
-            // 
             // cboUF
             // 
             this.cboUF.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -538,6 +528,17 @@
             this.cboUF.Name = "cboUF";
             this.cboUF.Size = new System.Drawing.Size(362, 35);
             this.cboUF.TabIndex = 14;
+            // 
+            // txtBairro
+            // 
+            this.txtBairro.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtBairro.Font = new System.Drawing.Font("Calibri", 13F);
+            this.txtBairro.Location = new System.Drawing.Point(1132, 505);
+            this.txtBairro.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBairro.MaxLength = 50;
+            this.txtBairro.Name = "txtBairro";
+            this.txtBairro.Size = new System.Drawing.Size(367, 34);
+            this.txtBairro.TabIndex = 16;
             // 
             // flpBotoes
             // 
@@ -576,6 +577,7 @@
             this.btnCancelar.TabIndex = 18;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnLimpar
             // 
@@ -588,6 +590,7 @@
             this.btnLimpar.TabIndex = 17;
             this.btnLimpar.Text = "Limpar";
             this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // lblTitulo
             // 

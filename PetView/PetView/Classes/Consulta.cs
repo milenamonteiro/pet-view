@@ -79,10 +79,6 @@ namespace PetView
                 {
                     cmd.SelectCommand.Parameters.Add("@tipo_consulta", SqlDbType.VarChar).Value = value;
                 }
-                else if ("Data".Equals(type))
-                {
-                    cmd.SelectCommand.Parameters.Add("@data_consulta", SqlDbType.DateTime).Value = value;
-                }
                 DataTable dtbl = new DataTable();
                 cmd.Fill(dtbl);
                 return dtbl;

@@ -719,8 +719,7 @@ create proc sp_select_consulta(
 @nome_medico varchar(70) = null,
 @nome_dono varchar(70) = null,
 @custo_consulta money = null,
-@tipo_consulta varchar(15) = null,
-@data_consulta datetime = null
+@tipo_consulta varchar(15) = null
 )
 as
 begin
@@ -737,7 +736,7 @@ else if (@nome_animal is not null) begin
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
-	where A.nome_animal like concat('%',@cod_consulta,'%');
+	where A.nome_animal like concat('%',@nome_animal,'%');
 end
 
 else if (@nome_medico is not null) begin
@@ -770,14 +769,6 @@ else if (@tipo_consulta is not null) begin
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
 	where C.tipo_consulta like concat('%',@tipo_consulta,'%');
-end
-
-else if (@data_consulta is not null) begin
-	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
-	inner join tbAnimal A on A.cod_animal = C.cod_animal
-	inner join tbMedico M on M.cod_medico = C.cod_medico
-	inner join tbDono D on D.cod_dono = A.cod_dono
-	where C.data_consulta like @data_consulta;
 end
 
 else begin
@@ -825,8 +816,7 @@ create proc sp_select_tratamento(
 @nome_medico varchar(70) = null,
 @nome_dono varchar(70) = null,
 @custo_tratamento money = null,
-@tipo_tratamento varchar(30) = null,
-@data_tratamento datetime = null
+@tipo_tratamento varchar(30) = null
 )
 as
 begin
@@ -878,14 +868,6 @@ else if (@tipo_tratamento is not null) begin
 	where T.tipo_tratamento like concat('%',@tipo_tratamento,'%');
 end
 
-else if (@data_tratamento is not null) begin
-	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
-	inner join tbAnimal A on A.cod_animal = T.cod_animal
-	inner join tbMedico M on M.cod_medico = T.cod_medico
-	inner join tbDono D on D.cod_dono = A.cod_dono
-	where T.data_tratamento like @data_tratamento;
-end
-
 else begin
 	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
@@ -932,8 +914,7 @@ create proc sp_select_exame(
 @nome_medico varchar(70) = null,
 @nome_dono varchar(70) = null,
 @custo_exame money = null,
-@tipo_exame varchar(30) = null,
-@data_exame datetime = null
+@tipo_exame varchar(30) = null
 )
 as
 begin

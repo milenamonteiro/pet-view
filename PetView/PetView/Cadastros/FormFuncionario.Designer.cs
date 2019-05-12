@@ -35,7 +35,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtRGFunc = new System.Windows.Forms.TextBox();
-            this.txtNomeFunc = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtEmailFunc = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -59,6 +58,7 @@
             this.txtCPF = new System.Windows.Forms.MaskedTextBox();
             this.txtCEP = new System.Windows.Forms.MaskedTextBox();
             this.cboUF = new System.Windows.Forms.ComboBox();
+            this.txtNomeFunc = new System.Windows.Forms.TextBox();
             this.flpBotoes = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -205,17 +205,6 @@
             this.txtRGFunc.Name = "txtRGFunc";
             this.txtRGFunc.Size = new System.Drawing.Size(367, 34);
             this.txtRGFunc.TabIndex = 19;
-            // 
-            // txtNomeFunc
-            // 
-            this.txtNomeFunc.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtNomeFunc.Font = new System.Drawing.Font("Calibri", 13F);
-            this.txtNomeFunc.Location = new System.Drawing.Point(365, 29);
-            this.txtNomeFunc.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNomeFunc.MaxLength = 70;
-            this.txtNomeFunc.Name = "txtNomeFunc";
-            this.txtNomeFunc.Size = new System.Drawing.Size(367, 34);
-            this.txtNomeFunc.TabIndex = 25;
             // 
             // label8
             // 
@@ -426,6 +415,7 @@
             // nupSalario
             // 
             this.nupSalario.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nupSalario.DecimalPlaces = 2;
             this.nupSalario.Font = new System.Drawing.Font("Calibri", 13F);
             this.nupSalario.Location = new System.Drawing.Point(1132, 233);
             this.nupSalario.Margin = new System.Windows.Forms.Padding(4);
@@ -503,6 +493,17 @@
             this.cboUF.Size = new System.Drawing.Size(362, 35);
             this.cboUF.TabIndex = 52;
             // 
+            // txtNomeFunc
+            // 
+            this.txtNomeFunc.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtNomeFunc.Font = new System.Drawing.Font("Calibri", 13F);
+            this.txtNomeFunc.Location = new System.Drawing.Point(365, 29);
+            this.txtNomeFunc.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNomeFunc.MaxLength = 70;
+            this.txtNomeFunc.Name = "txtNomeFunc";
+            this.txtNomeFunc.Size = new System.Drawing.Size(367, 34);
+            this.txtNomeFunc.TabIndex = 25;
+            // 
             // flpBotoes
             // 
             this.flpBotoes.Controls.Add(this.btnCadastrar);
@@ -540,6 +541,7 @@
             this.btnCancelar.TabIndex = 16;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnLimpar
             // 
@@ -552,6 +554,7 @@
             this.btnLimpar.TabIndex = 18;
             this.btnLimpar.Text = "Limpar";
             this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // lblTitulo
             // 

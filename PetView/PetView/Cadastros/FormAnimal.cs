@@ -78,5 +78,29 @@ namespace PetView
                 }
             }
         }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Limpeza();
+        }
+
+        private void Limpeza()
+        {
+            CarregarDono();
+            txtEspecie.Text = "";
+            txtRaca.Text = "";
+            txtNomeAnimal.Text = "";
+            nupIdade.Value = 0;
+            rbAnos.Checked = false;
+            rbMeses.Checked = false;
+            txtRGA.Text = "";
+            rtxtDescricao.Text = "";
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+        }
     }
 }

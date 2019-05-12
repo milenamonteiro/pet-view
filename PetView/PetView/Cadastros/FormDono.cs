@@ -20,6 +20,7 @@ namespace PetView
 
         void CarregaEstado()
         {
+            cboUF.Items.Clear();
             List<string> estados = new List<string> { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" };
             estados.ForEach(item => cboUF.Items.Add(item));
             cboUF.SelectedIndex = -1;
@@ -54,6 +55,34 @@ namespace PetView
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
+            this.Visible = false;
+        }
+    
+        private void Limpeza()
+        {
+            CarregaEstado();
+            txtNomeDono.Text = "";
+            txtEmailDono.Text = "";
+            txtRGDono.Text = "";
+            txtCPF.Text = "";
+            txtCelular.Text = "";
+            txtTelefone.Text = "";
+            txtEndereco.Text = "";
+            nupNumero.Value = 0;
+            txtComplemento.Text = "";
+            txtBairro.Text = "";
+            txtCidade.Text = "";
+            txtCEP.Text = "";
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Limpeza();
         }
     }
 }

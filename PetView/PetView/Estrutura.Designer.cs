@@ -407,7 +407,7 @@
             // registros1
             // 
             this.registros1.Location = new System.Drawing.Point(304, 623);
-            this.registros1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.registros1.Margin = new System.Windows.Forms.Padding(4);
             this.registros1.Name = "registros1";
             this.registros1.Size = new System.Drawing.Size(385, 113);
             this.registros1.TabIndex = 6;

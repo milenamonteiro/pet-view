@@ -108,6 +108,7 @@
             this.cboColunas.Name = "cboColunas";
             this.cboColunas.Size = new System.Drawing.Size(160, 35);
             this.cboColunas.TabIndex = 2;
+            this.cboColunas.SelectedIndexChanged += new System.EventHandler(this.cboColunas_SelectedIndexChanged);
             // 
             // label2
             // 
