@@ -19,7 +19,7 @@ namespace PetView
             CarregarDono();
         }
 
-        void CarregarDono()
+        private void CarregarDono()
         {
             SqlConnection con = new SqlConnection(StringConexao.connectionString);
             SqlCommand cmd = new SqlCommand("SELECT cod_dono as [Codigo], CONCAT(nome_dono, ', CPF: ', cpf_dono) as [Dono] from tbDono", con);
@@ -47,6 +47,7 @@ namespace PetView
                 con.Close();
             }
         }
+
         string tempo;
         private void btnCadastrar_Click(object sender, EventArgs e)
         {

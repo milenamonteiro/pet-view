@@ -24,11 +24,13 @@ namespace PetView
         public double SalarioMedico { get; set; }
         public Endereco endereco { get; set; }
 
+        public Medico() { }
+
         public static DataTable Select(String type, String value)
         {
             using (SqlConnection con = new SqlConnection(StringConexao.connectionString))
             {
-                SqlDataAdapter cmd = new SqlDataAdapter("sp_select_func", con);
+                SqlDataAdapter cmd = new SqlDataAdapter("sp_select_medico", con);
                 cmd.SelectCommand.CommandType = CommandType.StoredProcedure;
 
                 if ("Código".Equals(type))
@@ -41,7 +43,7 @@ namespace PetView
                 }
                 else if ("Nome".Equals(type))
                 {
-                    cmd.SelectCommand.Parameters.Add("@nome_func", SqlDbType.VarChar).Value = value;
+                    cmd.SelectCommand.Parameters.Add("@nome_med", SqlDbType.VarChar).Value = value;
                 }
                 else if ("Função".Equals(type))
                 {

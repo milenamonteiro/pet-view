@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PetView
 {
@@ -18,19 +20,34 @@ namespace PetView
         public String Observacao { get; set; }
         public double Custo { get; set; }
         public String TipoConsulta { get; set; }
-        public DateTime DataConsulta { get; set; }
+        public String DataConsulta { get; set; }
 
-        public Consulta(int codConsulta, string sintomas, string diagnostico, string observacao, double custo, string tipoConsulta, DateTime dataConsulta)
+        public Consulta() { }
+
+        //FUNCIONÁRIO
+
+        public Consulta(string observacao, double custo, string tipoConsulta, string dataConsulta, int codMedico, int codAnimal)
         {
-            CodConsulta = codConsulta;
-            Sintomas = sintomas;
-            Diagnostico = diagnostico;
-            Observacao = observacao;
-            Custo = custo;
-            TipoConsulta = tipoConsulta;
-            DataConsulta = dataConsulta;
+            medico = new Medico();
+            animal = new Animal();
+            this.Observacao = observacao;
+            this.Custo = custo;
+            this.TipoConsulta = tipoConsulta;
+            this.DataConsulta = dataConsulta;
+            medico.CodigoMedico = codMedico;
+            animal.CodigoAnimal = codAnimal;
         }
 
+        //MÉDICO
+
+        public Consulta(int codConsulta, string sintomas, string diagnostico, string observacao)
+        {
+            this.CodConsulta = codConsulta;
+            this.Sintomas = sintomas;
+            this.Diagnostico = diagnostico;
+            this.Observacao = observacao;
+        }
+        
         public static DataTable Select(String type, String value)
         {
             using (SqlConnection con = new SqlConnection(StringConexao.connectionString))
@@ -79,12 +96,80 @@ namespace PetView
 
         public void Insert()
         {
-            throw new NotImplementedException();
+            SqlConnection con = new SqlConnection(StringConexao.connectionString);
+
+            SqlCommand cmd = new SqlCommand("sp_insert_consulta", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@cod_animal", SqlDbType.Int).Value = animal.CodigoAnimal;
+            cmd.Parameters.Add("@cod_medico", SqlDbType.Int).Value = medico.CodigoMedico;
+            cmd.Parameters.Add("@custo_consulta", SqlDbType.Money).Value = Custo;
+            if (string.IsNullOrWhiteSpace(Observacao))
+                cmd.Parameters.Add("@observacao_consulta", SqlDbType.VarChar).Value = SqlString.Null;
+            else
+                cmd.Parameters.Add("@observacao_consulta", SqlDbType.VarChar).Value = Observacao;
+            cmd.Parameters.Add("@tipo_consulta", SqlDbType.VarChar).Value = TipoConsulta;
+            cmd.Parameters.Add("@data_consulta", SqlDbType.DateTime).Value = DataConsulta;
+
+            con.Open();
+
+            try
+            {
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    MessageBox.Show("Consulta registrada com sucesso!", "Cadastro finalizado.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Erro: " + e.ToString());
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
         }
 
         public void Update()
         {
-            throw new NotImplementedException();
+            SqlConnection con = new SqlConnection(StringConexao.connectionString);
+
+            SqlCommand cmd = new SqlCommand("sp_update_consulta", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            
+            cmd.Parameters.Add("@cod_consulta", SqlDbType.Int).Value = CodConsulta;
+            if (string.IsNullOrWhiteSpace(Observacao))
+                cmd.Parameters.Add("@observacao_consulta", SqlDbType.VarChar).Value = SqlString.Null;
+            else
+                cmd.Parameters.Add("@observacao_consulta", SqlDbType.VarChar).Value = Observacao;
+            cmd.Parameters.Add("@sintomas", SqlDbType.VarChar).Value = Sintomas;
+            cmd.Parameters.Add("@diagnostico", SqlDbType.VarChar).Value = Diagnostico;
+
+            con.Open();
+
+            try
+            {
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    MessageBox.Show("Consulta registrada com sucesso!", "Cadastro finalizado.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Erro: " + e.ToString());
+            }
+            finally
+            {
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
         }
     }
 }

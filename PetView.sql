@@ -23,7 +23,7 @@ cod_funcionario int identity(1,1) constraint PK_tbFuncionario primary key,
 nome_func varchar(70) not null,
 cpf_func char(11) not null,
 rg_func char(9) not null,
-status_func char(8) not null constraint DF_tbFuncionario_status default 'Ativo', -- ativo ou demitido
+status_func varchar(8) not null constraint DF_tbFuncionario_status default 'Ativo', -- ativo ou demitido
 tel_func char(10),
 cel_func char(11) not null,
 email_func varchar(100),
@@ -39,7 +39,7 @@ GO
 create table tbMedico(
 cod_medico int identity(1,1) constraint PK_tbMedico primary key,
 crmv int not null,
-nome_med char(70) not null,
+nome_med varchar(70) not null,
 funcao_med varchar(30) not null,
 cpf_med char(11) not null,
 rg_med char(9) not null,
@@ -47,7 +47,7 @@ cel_med char(11) not null,
 tel_med char(10),
 email_med varchar(100) not null,
 salario_med money not null,
-status_med char(8) not null constraint DF_tbMedico_status default 'Ativo', -- ativo ou demitido
+status_med varchar(8) not null constraint DF_tbMedico_status default 'Ativo', -- ativo ou demitido
 cep_med char(8) not null,
 numcasa_med int not null,
 constraint FK_tbMedico_tbEndereco foreign key(cep_med, numcasa_med) references tbEndereco(cep,numero),
@@ -106,6 +106,7 @@ custo_consulta money not null,
 tipo_consulta varchar(30) not null,
 data_consulta datetime not null,
 observacao_consulta varchar(300),
+status_consulta bit not null constraint DF_tbConsulta_status default 0,
 constraint FK_tbConsulta_tbAnimal foreign key(cod_animal) references tbAnimal(cod_animal),
 constraint FK_tbConsulta_tbMedico foreign key(cod_medico) references tbMedico(cod_medico)
 );
@@ -120,6 +121,7 @@ tipo_tratamento varchar(30) not null,
 observacao_tratamento varchar(300),
 custo_tratamento money not null,
 data_tratamento datetime not null,
+status_tratamento bit not null constraint DF_tbTratamento_status default 0,
 constraint FK_tbTratamento_tbAnimal foreign key(cod_animal) references tbAnimal(cod_animal),
 constraint FK_tbTratamento_tbMedico foreign key(cod_medico) references tbMedico(cod_medico),
 constraint FK_tbTratamento_tbConsulta foreign key(cod_consulta) references tbConsulta(cod_consulta)
@@ -135,6 +137,7 @@ tipo_exame varchar(30) not null,
 observacao_exame varchar(300),
 custo_exame money not null,
 data_exame datetime not null,
+status_exame bit not null constraint DF_tbExame_status default 0,
 constraint FK_tbExame_tbAnimal foreign key(cod_animal) references tbAnimal(cod_animal),
 constraint FK_tbExame_tbMedico foreign key(cod_medico) references tbMedico(cod_medico),
 constraint FK_tbExame_tbConsulta foreign key(cod_consulta) references tbConsulta(cod_consulta)
@@ -681,11 +684,25 @@ GO
 
 -- CONSULTA
 
+create proc sp_update_consulta(
+@cod_consulta int,
+@observacao_consulta varchar(300) = null,
+@sintomas varchar(1000),
+@diagnostico varchar(1000)
+) 
+as
+	begin
+		update tbConsulta
+		set observacao_consulta = @observacao_consulta, sintomas = @sintomas, diagnostico = @diagnostico, status_consulta = 1
+		where cod_consulta = @cod_consulta
+	end
+GO
+
 create proc sp_insert_consulta(
 @cod_animal int,
 @cod_medico int,
 @custo_consulta money,
-@observacao_consulta varchar(300),
+@observacao_consulta varchar(300) = null,
 @tipo_consulta varchar(15),
 @data_consulta datetime
 ) 
@@ -694,7 +711,6 @@ as
 		insert into tbConsulta (cod_animal, cod_medico, observacao_consulta, custo_consulta, tipo_consulta, data_consulta)
 			values(@cod_animal, @cod_medico, @observacao_consulta, @custo_consulta, @tipo_consulta, @data_consulta)
 	end
- 
 GO
 
 create proc sp_select_consulta(
@@ -709,7 +725,7 @@ create proc sp_select_consulta(
 as
 begin
 if (@cod_consulta is not null) begin
-	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -717,7 +733,7 @@ if (@cod_consulta is not null) begin
 end
 
 else if (@nome_animal is not null) begin
-	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -725,7 +741,7 @@ else if (@nome_animal is not null) begin
 end
 
 else if (@nome_medico is not null) begin
-	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -733,7 +749,7 @@ else if (@nome_medico is not null) begin
 end
 
 else if (@nome_dono is not null) begin
-	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -741,7 +757,7 @@ else if (@nome_dono is not null) begin
 end
 
 else if (@custo_consulta is not null) begin
-	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -749,7 +765,7 @@ else if (@custo_consulta is not null) begin
 end
 
 else if (@tipo_consulta is not null) begin
-	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -757,7 +773,7 @@ else if (@tipo_consulta is not null) begin
 end
 
 else if (@data_consulta is not null) begin
-	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -765,7 +781,7 @@ else if (@data_consulta is not null) begin
 end
 
 else begin
-	select C.cod_consulta [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
+	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], C.tipo_consulta [Tipo], C.sintomas [Sintomas], C.diagnostico [Diagnóstico], C.custo_consulta [Custo] from tbConsulta C
 	inner join tbAnimal A on A.cod_animal = C.cod_animal
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono;
@@ -775,12 +791,24 @@ GO
 
 -- TRATAMENTO
 
+create proc sp_update_tratamento(
+@cod_tratamento int,
+@observacao varchar(300)
+) 
+as
+	begin
+		update tbTratamento
+		set observacao_tratamento = @observacao, status_tratamento = 1
+		where cod_tratamento = @cod_tratamento
+	end
+GO
+
 create proc sp_insert_tratamento(
 @cod_animal int,
 @cod_medico int,
 @cod_consulta int,
 @tipo_tratamento varchar(30),
-@observacao_tratamento varchar(300),
+@observacao_tratamento varchar(300) = null,
 @custo_tratamento money,
 @data_tratamento datetime
 ) 
@@ -803,7 +831,7 @@ create proc sp_select_tratamento(
 as
 begin
 if (@cod_tratamento is not null) begin
-	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -811,7 +839,7 @@ if (@cod_tratamento is not null) begin
 end
 
 else if (@nome_animal is not null) begin
-	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -819,7 +847,7 @@ else if (@nome_animal is not null) begin
 end
 
 else if (@nome_medico is not null) begin
-	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -827,7 +855,7 @@ else if (@nome_medico is not null) begin
 end
 
 else if (@nome_dono is not null) begin
-	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -835,7 +863,7 @@ else if (@nome_dono is not null) begin
 end
 
 else if (@custo_tratamento is not null) begin
-	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -843,7 +871,7 @@ else if (@custo_tratamento is not null) begin
 end
 
 else if (@tipo_tratamento is not null) begin
-	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -851,7 +879,7 @@ else if (@tipo_tratamento is not null) begin
 end
 
 else if (@data_tratamento is not null) begin
-	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -859,7 +887,7 @@ else if (@data_tratamento is not null) begin
 end
 
 else begin
-	select T.cod_tratamento [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações], T.data_tratamento [Data] from tbTratamento T
 	inner join tbAnimal A on A.cod_animal = T.cod_animal
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono;
@@ -868,6 +896,18 @@ end
 GO
 
 -- EXAME
+
+create proc sp_update_exame(
+@cod_exame int,
+@observacao varchar(300)
+) 
+as
+	begin
+		update tbExame
+		set observacao_exame = observacao_exame, status_exame = 1
+		where cod_exame = @cod_exame
+	end
+GO
 
 create proc sp_insert_exame(
 @cod_animal int,
@@ -898,7 +938,7 @@ create proc sp_select_exame(
 as
 begin
 if (@cod_exame is not null) begin
-	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
 	inner join tbAnimal A on A.cod_animal = E.cod_animal
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -906,7 +946,7 @@ if (@cod_exame is not null) begin
 end
 
 else if (@nome_animal is not null) begin
-	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
 	inner join tbAnimal A on A.cod_animal = E.cod_animal
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -914,7 +954,7 @@ else if (@nome_animal is not null) begin
 end
 
 else if (@nome_medico is not null) begin
-	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
 	inner join tbAnimal A on A.cod_animal = E.cod_animal
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -922,7 +962,7 @@ else if (@nome_medico is not null) begin
 end
 
 else if (@nome_dono is not null) begin
-	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
 	inner join tbAnimal A on A.cod_animal = E.cod_animal
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -930,7 +970,7 @@ else if (@nome_dono is not null) begin
 end
 
 else if (@custo_exame is not null) begin
-	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
 	inner join tbAnimal A on A.cod_animal = E.cod_animal
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -938,7 +978,7 @@ else if (@custo_exame is not null) begin
 end
 
 else if (@tipo_exame is not null) begin
-	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
 	inner join tbAnimal A on A.cod_animal = E.cod_animal
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -946,7 +986,7 @@ else if (@tipo_exame is not null) begin
 end
 
 else if (@custo_exame is not null) begin
-	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
 	inner join tbAnimal A on A.cod_animal = E.cod_animal
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
@@ -954,11 +994,133 @@ else if (@custo_exame is not null) begin
 end
 
 else begin
-	select E.cod_exame [ID], M.nome_med [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.tipo_exame [Tipo], E.custo_exame [Custo], E.data_exame [Data] from tbExame E
 	inner join tbAnimal A on A.cod_animal = E.cod_animal
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono;
 end
+end
+GO
+
+create proc sp_select_servicos(
+@data_inicial datetime = null,
+@data_final datetime = null,
+@cod_medico int = null
+)
+as
+begin
+
+if (@data_inicial is not null and @data_final is not null) begin
+select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], 'Consulta' [Descrição], C.tipo_consulta [Tipo], C.custo_consulta [Custo], C.observacao_consulta [Observações] 
+	from tbConsulta C
+
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+
+	where C.data_consulta between @data_inicial and @data_final
+
+	union
+
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.data_exame [Data], 'Exame' [Descrição], E.tipo_exame [Tipo], E.custo_exame [Custo], E.observacao_exame [Observações] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	
+	where E.data_exame between @data_inicial and @data_final
+
+	union
+
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.data_tratamento [Data], 'Tratamento' [Descrição], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+
+	where T.data_tratamento between @data_inicial and @data_final
+
+end
+
+else if (@data_inicial is not null and @data_final is not null and @cod_medico is not null) begin
+select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], 'Consulta' [Descrição], C.tipo_consulta [Tipo], C.custo_consulta [Custo], C.observacao_consulta [Observações] 
+	from tbConsulta C
+
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+
+	where C.cod_medico = @cod_medico and C.data_consulta between @data_inicial and @data_final
+
+	union
+
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.data_exame [Data], 'Exame' [Descrição], E.tipo_exame [Tipo], E.custo_exame [Custo], E.observacao_exame [Observações] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	
+	where E.cod_medico = @cod_medico and E.data_exame between @data_inicial and @data_final
+
+	union
+
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.data_tratamento [Data], 'Tratamento' [Descrição], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+
+	where T.cod_medico = @cod_medico and T.data_tratamento between @data_inicial and @data_final
+end
+
+else if (@data_inicial is null and @data_final is null and @cod_medico is not null) begin
+select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], 'Consulta' [Descrição], C.tipo_consulta [Tipo], C.custo_consulta [Custo], C.observacao_consulta [Observações] 
+	from tbConsulta C
+
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+
+	where C.cod_medico = @cod_medico
+
+	union
+
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.data_exame [Data], 'Exame' [Descrição], E.tipo_exame [Tipo], E.custo_exame [Custo], E.observacao_exame [Observações] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+	
+	where E.cod_medico = @cod_medico
+
+	union
+
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.data_tratamento [Data], 'Tratamento' [Descrição], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+
+	where T.cod_medico = @cod_medico
+end
+
+else begin
+	select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], C.data_consulta [Data], 'Consulta' [Descrição], C.tipo_consulta [Tipo], C.custo_consulta [Custo], C.observacao_consulta [Observações] 
+	from tbConsulta C
+
+	inner join tbAnimal A on A.cod_animal = C.cod_animal
+	inner join tbMedico M on M.cod_medico = C.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+
+	union
+
+	select E.cod_exame [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], E.data_exame [Data], 'Exame' [Descrição], E.tipo_exame [Tipo], E.custo_exame [Custo], E.observacao_exame [Observações] from tbExame E
+	inner join tbAnimal A on A.cod_animal = E.cod_animal
+	inner join tbMedico M on M.cod_medico = E.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+
+	union
+
+	select T.cod_tratamento [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal], D.nome_dono [Dono], T.data_tratamento [Data], 'Tratamento' [Descrição], T.tipo_tratamento [Tipo], T.custo_tratamento [Custo], T.observacao_tratamento [Observações] from tbTratamento T
+	inner join tbAnimal A on A.cod_animal = T.cod_animal
+	inner join tbMedico M on M.cod_medico = T.cod_medico
+	inner join tbDono D on D.cod_dono = A.cod_dono
+end
+
 end
 GO
 
@@ -996,7 +1158,7 @@ create proc sp_select_usuario_ativo(
 )
 as
 begin
-	select M.nome_med, F.nome_func from tbUsuario U
+	select RTRIM(M.nome_med) [nome_med], F.nome_func from tbUsuario U
 	left join tbMedico M on M.cod_medico = U.cod_medico
 	left join tbFuncionario F on F.cod_funcionario = U.cod_funcionario
 	where ativacao_usuario = 1;

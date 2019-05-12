@@ -35,22 +35,27 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.cboAnimal = new System.Windows.Forms.ComboBox();
+            this.cboTipoAgendamento = new System.Windows.Forms.ComboBox();
+            this.cboDono = new System.Windows.Forms.ComboBox();
+            this.cboMed = new System.Windows.Forms.ComboBox();
+            this.dtpData = new System.Windows.Forms.DateTimePicker();
+            this.dtpHora = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtxtObs = new System.Windows.Forms.RichTextBox();
+            this.lblConsultaAnterior = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.cboTipo = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nupCusto = new System.Windows.Forms.NumericUpDown();
+            this.cboConsulta = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCadastrar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupCusto)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,19 +72,23 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox3, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox4, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePicker1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePicker2, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.cboAnimal, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cboTipoAgendamento, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cboDono, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cboMed, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.dtpData, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dtpHora, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label10, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox5, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtObs, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblConsultaAnterior, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label10, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cboTipo, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.nupCusto, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cboConsulta, 3, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 66);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
             this.tableLayoutPanel1.RowCount = 6;
@@ -98,7 +107,7 @@
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Font = new System.Drawing.Font("Calibri", 13F);
             this.label8.Location = new System.Drawing.Point(31, 233);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label8.Margin = new System.Windows.Forms.Padding(4);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
             this.label8.Size = new System.Drawing.Size(293, 60);
@@ -112,7 +121,7 @@
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Font = new System.Drawing.Font("Calibri", 13F);
             this.label7.Location = new System.Drawing.Point(783, 165);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label7.Margin = new System.Windows.Forms.Padding(4);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
             this.label7.Size = new System.Drawing.Size(293, 60);
@@ -126,7 +135,7 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Font = new System.Drawing.Font("Calibri", 13F);
             this.label6.Location = new System.Drawing.Point(783, 97);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label6.Margin = new System.Windows.Forms.Padding(4);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
             this.label6.Size = new System.Drawing.Size(293, 60);
@@ -137,13 +146,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Calibri", 13F);
             this.label1.Location = new System.Drawing.Point(31, 29);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label1.Margin = new System.Windows.Forms.Padding(4);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
-            this.label1.Size = new System.Drawing.Size(293, 60);
+            this.label1.Size = new System.Drawing.Size(278, 51);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tipo de agendamento:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -154,7 +162,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Calibri", 13F);
             this.label2.Location = new System.Drawing.Point(31, 97);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label2.Margin = new System.Windows.Forms.Padding(4);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
             this.label2.Size = new System.Drawing.Size(293, 60);
@@ -168,7 +176,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Calibri", 13F);
             this.label3.Location = new System.Drawing.Point(31, 165);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label3.Margin = new System.Windows.Forms.Padding(4);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
             this.label3.Size = new System.Drawing.Size(293, 60);
@@ -176,83 +184,90 @@
             this.label3.Text = "Data:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // comboBox3
+            // cboAnimal
             // 
-            this.comboBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox3.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(1096, 109);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(421, 35);
-            this.comboBox3.TabIndex = 9;
+            this.cboAnimal.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboAnimal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAnimal.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboAnimal.FormattingEnabled = true;
+            this.cboAnimal.Location = new System.Drawing.Point(1096, 109);
+            this.cboAnimal.Margin = new System.Windows.Forms.Padding(4);
+            this.cboAnimal.Name = "cboAnimal";
+            this.cboAnimal.Size = new System.Drawing.Size(421, 35);
+            this.cboAnimal.TabIndex = 9;
+            this.cboAnimal.TextChanged += new System.EventHandler(this.cboAnimal_TextChanged);
             // 
-            // comboBox1
+            // cboTipoAgendamento
             // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(342, 41);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(423, 35);
-            this.comboBox1.TabIndex = 4;
+            this.cboTipoAgendamento.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboTipoAgendamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoAgendamento.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboTipoAgendamento.FormattingEnabled = true;
+            this.cboTipoAgendamento.Location = new System.Drawing.Point(342, 41);
+            this.cboTipoAgendamento.Margin = new System.Windows.Forms.Padding(4);
+            this.cboTipoAgendamento.Name = "cboTipoAgendamento";
+            this.cboTipoAgendamento.Size = new System.Drawing.Size(423, 35);
+            this.cboTipoAgendamento.TabIndex = 4;
+            this.cboTipoAgendamento.TextChanged += new System.EventHandler(this.cboTipoAgendamento_TextChanged);
             // 
-            // comboBox2
+            // cboDono
             // 
-            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(343, 109);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(421, 35);
-            this.comboBox2.TabIndex = 6;
+            this.cboDono.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboDono.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDono.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboDono.FormattingEnabled = true;
+            this.cboDono.Location = new System.Drawing.Point(343, 109);
+            this.cboDono.Margin = new System.Windows.Forms.Padding(4);
+            this.cboDono.Name = "cboDono";
+            this.cboDono.Size = new System.Drawing.Size(421, 35);
+            this.cboDono.TabIndex = 6;
+            this.cboDono.TextChanged += new System.EventHandler(this.cboDono_TextChanged);
             // 
-            // comboBox4
+            // cboMed
             // 
-            this.comboBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox4.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(343, 245);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(421, 35);
-            this.comboBox4.TabIndex = 19;
+            this.cboMed.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboMed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMed.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboMed.FormattingEnabled = true;
+            this.cboMed.Location = new System.Drawing.Point(343, 245);
+            this.cboMed.Margin = new System.Windows.Forms.Padding(4);
+            this.cboMed.Name = "cboMed";
+            this.cboMed.Size = new System.Drawing.Size(421, 35);
+            this.cboMed.TabIndex = 19;
             // 
-            // dateTimePicker1
+            // dtpData
             // 
-            this.dateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            this.dateTimePicker1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(343, 178);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(420, 34);
-            this.dateTimePicker1.TabIndex = 5;
-            this.dateTimePicker1.Value = new System.DateTime(2019, 4, 13, 16, 37, 40, 0);
+            this.dtpData.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dtpData.CustomFormat = "yyyy-MM-dd";
+            this.dtpData.Font = new System.Drawing.Font("Calibri", 13F);
+            this.dtpData.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpData.Location = new System.Drawing.Point(343, 178);
+            this.dtpData.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpData.Name = "dtpData";
+            this.dtpData.Size = new System.Drawing.Size(420, 34);
+            this.dtpData.TabIndex = 5;
+            this.dtpData.Value = new System.DateTime(2019, 5, 2, 0, 0, 0, 0);
             // 
-            // dateTimePicker2
+            // dtpHora
             // 
-            this.dateTimePicker2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dateTimePicker2.CustomFormat = "HH:MM";
-            this.dateTimePicker2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker2.Location = new System.Drawing.Point(1096, 178);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.ShowUpDown = true;
-            this.dateTimePicker2.Size = new System.Drawing.Size(420, 34);
-            this.dateTimePicker2.TabIndex = 21;
-            this.dateTimePicker2.Value = new System.DateTime(2019, 4, 13, 16, 37, 0, 0);
+            this.dtpHora.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dtpHora.CustomFormat = "HH:MM";
+            this.dtpHora.Font = new System.Drawing.Font("Calibri", 13F);
+            this.dtpHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpHora.Location = new System.Drawing.Point(1096, 178);
+            this.dtpHora.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpHora.Name = "dtpHora";
+            this.dtpHora.ShowUpDown = true;
+            this.dtpHora.Size = new System.Drawing.Size(420, 34);
+            this.dtpHora.TabIndex = 21;
+            this.dtpHora.Value = new System.DateTime(2019, 4, 13, 16, 37, 0, 0);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Calibri", 13F);
             this.label9.Location = new System.Drawing.Point(31, 301);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label9.Margin = new System.Windows.Forms.Padding(4);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
             this.label9.Size = new System.Drawing.Size(195, 51);
@@ -260,24 +275,38 @@
             this.label9.Text = "Observações:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // richTextBox1
+            // rtxtObs
             // 
-            this.richTextBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.richTextBox1.Location = new System.Drawing.Point(348, 317);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(20, 18, 20, 18);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(411, 175);
-            this.richTextBox1.TabIndex = 22;
-            this.richTextBox1.Text = "";
+            this.rtxtObs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.rtxtObs.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtObs.Location = new System.Drawing.Point(348, 317);
+            this.rtxtObs.Margin = new System.Windows.Forms.Padding(20, 18, 20, 18);
+            this.rtxtObs.Name = "rtxtObs";
+            this.rtxtObs.Size = new System.Drawing.Size(411, 175);
+            this.rtxtObs.TabIndex = 22;
+            this.rtxtObs.Text = "";
+            // 
+            // lblConsultaAnterior
+            // 
+            this.lblConsultaAnterior.AutoSize = true;
+            this.lblConsultaAnterior.Font = new System.Drawing.Font("Calibri", 13F);
+            this.lblConsultaAnterior.Location = new System.Drawing.Point(783, 301);
+            this.lblConsultaAnterior.Margin = new System.Windows.Forms.Padding(4);
+            this.lblConsultaAnterior.Name = "lblConsultaAnterior";
+            this.lblConsultaAnterior.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
+            this.lblConsultaAnterior.Size = new System.Drawing.Size(237, 51);
+            this.lblConsultaAnterior.TabIndex = 25;
+            this.lblConsultaAnterior.Text = "Consulta anterior:";
+            this.lblConsultaAnterior.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblConsultaAnterior.Visible = false;
             // 
             // label10
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Calibri", 13F);
-            this.label10.Location = new System.Drawing.Point(783, 237);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.label10.Location = new System.Drawing.Point(783, 33);
+            this.label10.Margin = new System.Windows.Forms.Padding(4);
             this.label10.Name = "label10";
             this.label10.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
             this.label10.Size = new System.Drawing.Size(118, 51);
@@ -285,16 +314,64 @@
             this.label10.Text = "Tipo:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // comboBox5
+            // cboTipo
             // 
-            this.comboBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox5.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(1096, 245);
-            this.comboBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(421, 35);
-            this.comboBox5.TabIndex = 24;
+            this.cboTipo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipo.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboTipo.FormattingEnabled = true;
+            this.cboTipo.Location = new System.Drawing.Point(1096, 41);
+            this.cboTipo.Margin = new System.Windows.Forms.Padding(4);
+            this.cboTipo.Name = "cboTipo";
+            this.cboTipo.Size = new System.Drawing.Size(421, 35);
+            this.cboTipo.TabIndex = 24;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 13F);
+            this.label5.Location = new System.Drawing.Point(783, 237);
+            this.label5.Margin = new System.Windows.Forms.Padding(4);
+            this.label5.Name = "label5";
+            this.label5.Padding = new System.Windows.Forms.Padding(47, 12, 13, 12);
+            this.label5.Size = new System.Drawing.Size(130, 51);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Custo:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // nupCusto
+            // 
+            this.nupCusto.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nupCusto.DecimalPlaces = 2;
+            this.nupCusto.Font = new System.Drawing.Font("Calibri", 13F);
+            this.nupCusto.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nupCusto.Location = new System.Drawing.Point(1099, 246);
+            this.nupCusto.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nupCusto.Name = "nupCusto";
+            this.nupCusto.Size = new System.Drawing.Size(415, 34);
+            this.nupCusto.TabIndex = 28;
+            // 
+            // cboConsulta
+            // 
+            this.cboConsulta.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cboConsulta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboConsulta.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboConsulta.FormattingEnabled = true;
+            this.cboConsulta.Location = new System.Drawing.Point(1096, 312);
+            this.cboConsulta.Margin = new System.Windows.Forms.Padding(4, 15, 4, 4);
+            this.cboConsulta.Name = "cboConsulta";
+            this.cboConsulta.Size = new System.Drawing.Size(421, 35);
+            this.cboConsulta.TabIndex = 26;
+            this.cboConsulta.Visible = false;
             // 
             // label17
             // 
@@ -311,28 +388,29 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Controls.Add(this.btnCadastrar);
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.button3);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 751);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 27, 0);
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1560, 123);
             this.flowLayoutPanel1.TabIndex = 9;
             // 
-            // button2
+            // btnCadastrar
             // 
-            this.button2.Font = new System.Drawing.Font("Calibri", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(1287, 12);
-            this.button2.Margin = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(233, 62);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "Cadastrar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCadastrar.Font = new System.Drawing.Font("Calibri", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCadastrar.Location = new System.Drawing.Point(1287, 12);
+            this.btnCadastrar.Margin = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.btnCadastrar.Name = "btnCadastrar";
+            this.btnCadastrar.Size = new System.Drawing.Size(233, 62);
+            this.btnCadastrar.TabIndex = 17;
+            this.btnCadastrar.Text = "Cadastrar";
+            this.btnCadastrar.UseVisualStyleBackColor = true;
+            this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
             // button1
             // 
@@ -365,11 +443,12 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label17);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Agendamento";
             this.Size = new System.Drawing.Size(1560, 874);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupCusto)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -382,22 +461,26 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cboTipoAgendamento;
+        private System.Windows.Forms.DateTimePicker dtpData;
+        private System.Windows.Forms.ComboBox cboDono;
+        private System.Windows.Forms.ComboBox cboAnimal;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cboMed;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.DateTimePicker dtpHora;
+        private System.Windows.Forms.RichTextBox rtxtObs;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCadastrar;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox cboTipo;
+        private System.Windows.Forms.Label lblConsultaAnterior;
+        private System.Windows.Forms.ComboBox cboConsulta;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown nupCusto;
     }
 }

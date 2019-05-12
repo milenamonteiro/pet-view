@@ -30,22 +30,22 @@
         {
             this.label17 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.listView3 = new System.Windows.Forms.ListView();
             this.label8 = new System.Windows.Forms.Label();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.rtxtObservacoes = new System.Windows.Forms.RichTextBox();
+            this.rtxtDadosDiagnostico = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.cboConsulta = new System.Windows.Forms.ComboBox();
+            this.rtxtSintomas = new System.Windows.Forms.RichTextBox();
+            this.cboDono = new System.Windows.Forms.ComboBox();
+            this.rtxtDadosDono = new System.Windows.Forms.RichTextBox();
+            this.rtxtDadosConsulta = new System.Windows.Forms.RichTextBox();
+            this.rtxtDadosAnimal = new System.Windows.Forms.RichTextBox();
             this.flpBotoes = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -74,22 +74,22 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.10526F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.0921F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.01316F));
-            this.tableLayoutPanel1.Controls.Add(this.listView3, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.label8, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.richTextBox3, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.richTextBox2, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtObservacoes, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtDadosDiagnostico, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.label7, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listView2, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.label5, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox2, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cboConsulta, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtSintomas, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.cboDono, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtDadosDono, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtDadosConsulta, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtDadosAnimal, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 66);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -103,17 +103,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1560, 685);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
-            // listView3
-            // 
-            this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView3.Font = new System.Drawing.Font("Calibri", 13F);
-            this.listView3.Location = new System.Drawing.Point(1036, 511);
-            this.listView3.Margin = new System.Windows.Forms.Padding(15);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(489, 117);
-            this.listView3.TabIndex = 20;
-            this.listView3.UseCompatibleStateImageBehavior = false;
-            // 
             // label8
             // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -126,29 +115,29 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "Dados da consulta";
             // 
-            // richTextBox3
+            // rtxtObservacoes
             // 
-            this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox3.Font = new System.Drawing.Font("Calibri", 13F);
-            this.richTextBox3.Location = new System.Drawing.Point(273, 511);
-            this.richTextBox3.Margin = new System.Windows.Forms.Padding(15);
-            this.richTextBox3.MaxLength = 300;
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(534, 117);
-            this.richTextBox3.TabIndex = 14;
-            this.richTextBox3.Text = "";
+            this.rtxtObservacoes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtObservacoes.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtObservacoes.Location = new System.Drawing.Point(273, 511);
+            this.rtxtObservacoes.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtObservacoes.MaxLength = 300;
+            this.rtxtObservacoes.Name = "rtxtObservacoes";
+            this.rtxtObservacoes.Size = new System.Drawing.Size(534, 117);
+            this.rtxtObservacoes.TabIndex = 14;
+            this.rtxtObservacoes.Text = "";
             // 
-            // richTextBox2
+            // rtxtDadosDiagnostico
             // 
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.richTextBox2.Location = new System.Drawing.Point(1036, 259);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(15);
-            this.richTextBox2.MaxLength = 1000;
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(489, 222);
-            this.richTextBox2.TabIndex = 13;
-            this.richTextBox2.Text = "";
+            this.rtxtDadosDiagnostico.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDadosDiagnostico.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtDadosDiagnostico.Location = new System.Drawing.Point(1036, 259);
+            this.rtxtDadosDiagnostico.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtDadosDiagnostico.MaxLength = 1000;
+            this.rtxtDadosDiagnostico.Name = "rtxtDadosDiagnostico";
+            this.rtxtDadosDiagnostico.Size = new System.Drawing.Size(489, 222);
+            this.rtxtDadosDiagnostico.TabIndex = 13;
+            this.rtxtDadosDiagnostico.Text = "";
             // 
             // label7
             // 
@@ -198,17 +187,6 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Dados do dono";
             // 
-            // listView2
-            // 
-            this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.listView2.Location = new System.Drawing.Point(1036, 91);
-            this.listView2.Margin = new System.Windows.Forms.Padding(15);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(489, 138);
-            this.listView2.TabIndex = 6;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            // 
             // label5
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -245,48 +223,77 @@
             this.label6.TabIndex = 9;
             this.label6.Text = "Observações *";
             // 
-            // listView1
+            // cboConsulta
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.listView1.Location = new System.Drawing.Point(273, 91);
-            this.listView1.Margin = new System.Windows.Forms.Padding(15);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(534, 138);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.cboConsulta.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboConsulta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboConsulta.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboConsulta.FormattingEnabled = true;
+            this.cboConsulta.Location = new System.Drawing.Point(277, 30);
+            this.cboConsulta.Name = "cboConsulta";
+            this.cboConsulta.Size = new System.Drawing.Size(526, 35);
+            this.cboConsulta.TabIndex = 4;
+            this.cboConsulta.SelectedValueChanged += new System.EventHandler(this.cboConsulta_SelectedValueChanged);
             // 
-            // comboBox2
+            // rtxtSintomas
             // 
-            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(1036, 30);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(488, 35);
-            this.comboBox2.TabIndex = 11;
+            this.rtxtSintomas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtSintomas.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtSintomas.Location = new System.Drawing.Point(273, 259);
+            this.rtxtSintomas.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtSintomas.MaxLength = 1000;
+            this.rtxtSintomas.Name = "rtxtSintomas";
+            this.rtxtSintomas.Size = new System.Drawing.Size(534, 222);
+            this.rtxtSintomas.TabIndex = 12;
+            this.rtxtSintomas.Text = "";
             // 
-            // comboBox1
+            // cboDono
             // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(277, 30);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(526, 35);
-            this.comboBox1.TabIndex = 4;
+            this.cboDono.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboDono.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDono.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboDono.FormattingEnabled = true;
+            this.cboDono.Location = new System.Drawing.Point(1036, 30);
+            this.cboDono.Name = "cboDono";
+            this.cboDono.Size = new System.Drawing.Size(488, 35);
+            this.cboDono.TabIndex = 11;
+            this.cboDono.TextChanged += new System.EventHandler(this.cboDono_TextChanged);
             // 
-            // richTextBox1
+            // rtxtDadosDono
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.richTextBox1.Location = new System.Drawing.Point(273, 259);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(15);
-            this.richTextBox1.MaxLength = 1000;
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(534, 222);
-            this.richTextBox1.TabIndex = 12;
-            this.richTextBox1.Text = "";
+            this.rtxtDadosDono.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDadosDono.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtDadosDono.Location = new System.Drawing.Point(1036, 91);
+            this.rtxtDadosDono.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtDadosDono.Name = "rtxtDadosDono";
+            this.rtxtDadosDono.ReadOnly = true;
+            this.rtxtDadosDono.Size = new System.Drawing.Size(489, 138);
+            this.rtxtDadosDono.TabIndex = 21;
+            this.rtxtDadosDono.Text = "";
+            // 
+            // rtxtDadosConsulta
+            // 
+            this.rtxtDadosConsulta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDadosConsulta.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtDadosConsulta.Location = new System.Drawing.Point(1036, 511);
+            this.rtxtDadosConsulta.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtDadosConsulta.Name = "rtxtDadosConsulta";
+            this.rtxtDadosConsulta.ReadOnly = true;
+            this.rtxtDadosConsulta.Size = new System.Drawing.Size(489, 117);
+            this.rtxtDadosConsulta.TabIndex = 22;
+            this.rtxtDadosConsulta.Text = "";
+            // 
+            // rtxtDadosAnimal
+            // 
+            this.rtxtDadosAnimal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDadosAnimal.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtDadosAnimal.Location = new System.Drawing.Point(273, 91);
+            this.rtxtDadosAnimal.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtDadosAnimal.Name = "rtxtDadosAnimal";
+            this.rtxtDadosAnimal.ReadOnly = true;
+            this.rtxtDadosAnimal.Size = new System.Drawing.Size(534, 138);
+            this.rtxtDadosAnimal.TabIndex = 20;
+            this.rtxtDadosAnimal.Text = "";
             // 
             // flpBotoes
             // 
@@ -312,6 +319,7 @@
             this.btnCadastrar.TabIndex = 17;
             this.btnCadastrar.Text = "Finalizar consulta";
             this.btnCadastrar.UseVisualStyleBackColor = true;
+            this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
             // btnCancelar
             // 
@@ -360,22 +368,22 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cboConsulta;
+        private System.Windows.Forms.ComboBox cboDono;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtxtObservacoes;
+        private System.Windows.Forms.RichTextBox rtxtDadosDiagnostico;
+        private System.Windows.Forms.RichTextBox rtxtSintomas;
         private System.Windows.Forms.FlowLayoutPanel flpBotoes;
         private System.Windows.Forms.Button btnCadastrar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnLimpar;
-        private System.Windows.Forms.ListView listView3;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RichTextBox rtxtDadosAnimal;
+        private System.Windows.Forms.RichTextBox rtxtDadosDono;
+        private System.Windows.Forms.RichTextBox rtxtDadosConsulta;
     }
 }

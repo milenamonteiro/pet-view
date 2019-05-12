@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agenda.cs" />
     <Compile Include="Classes\Animal.cs" />
     <Compile Include="Cadastros\FormDono.cs">
       <SubType>UserControl</SubType>

@@ -30,18 +30,19 @@
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.cboTipo = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtpDataInicial = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtpDataFinal = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cboMedico = new System.Windows.Forms.ComboBox();
+            this.dgvAgenda = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnLimpar = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAgenda)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,13 +50,14 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.label4);
-            this.flowLayoutPanel1.Controls.Add(this.comboBox1);
+            this.flowLayoutPanel1.Controls.Add(this.cboTipo);
             this.flowLayoutPanel1.Controls.Add(this.label2);
-            this.flowLayoutPanel1.Controls.Add(this.dateTimePicker1);
+            this.flowLayoutPanel1.Controls.Add(this.dtpDataInicial);
             this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Controls.Add(this.dateTimePicker2);
+            this.flowLayoutPanel1.Controls.Add(this.dtpDataFinal);
             this.flowLayoutPanel1.Controls.Add(this.label5);
-            this.flowLayoutPanel1.Controls.Add(this.comboBox2);
+            this.flowLayoutPanel1.Controls.Add(this.cboMedico);
+            this.flowLayoutPanel1.Controls.Add(this.btnLimpar);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -75,21 +77,33 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Filtrar por:";
             // 
-            // comboBox1
+            // label4
             // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 13F);
+            this.label4.Location = new System.Drawing.Point(158, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 27);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Tipo";
+            // 
+            // cboTipo
+            // 
+            this.cboTipo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipo.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboTipo.FormattingEnabled = true;
+            this.cboTipo.Items.AddRange(new object[] {
             "Todos",
             "Consulta",
             "Exame",
             "Tratamento"});
-            this.comboBox1.Location = new System.Drawing.Point(216, 26);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(196, 35);
-            this.comboBox1.TabIndex = 0;
+            this.cboTipo.Location = new System.Drawing.Point(216, 21);
+            this.cboTipo.Name = "cboTipo";
+            this.cboTipo.Size = new System.Drawing.Size(196, 35);
+            this.cboTipo.TabIndex = 0;
+            this.cboTipo.SelectedIndexChanged += new System.EventHandler(this.cboTipo_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -102,6 +116,18 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Data entre";
             // 
+            // dtpDataInicial
+            // 
+            this.dtpDataInicial.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dtpDataInicial.CustomFormat = "yyyy-MM-dd";
+            this.dtpDataInicial.Font = new System.Drawing.Font("Calibri", 13F);
+            this.dtpDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDataInicial.Location = new System.Drawing.Point(533, 21);
+            this.dtpDataInicial.Name = "dtpDataInicial";
+            this.dtpDataInicial.Size = new System.Drawing.Size(200, 34);
+            this.dtpDataInicial.TabIndex = 7;
+            this.dtpDataInicial.ValueChanged += new System.EventHandler(this.dtpDataInicial_ValueChanged);
+            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -113,36 +139,17 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "até";
             // 
-            // label4
+            // dtpDataFinal
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 13F);
-            this.label4.Location = new System.Drawing.Point(158, 25);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 27);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Tipo";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dateTimePicker1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(533, 21);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 34);
-            this.dateTimePicker1.TabIndex = 7;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dateTimePicker2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(786, 21);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 34);
-            this.dateTimePicker2.TabIndex = 8;
+            this.dtpDataFinal.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dtpDataFinal.CustomFormat = "yyyy-MM-dd";
+            this.dtpDataFinal.Font = new System.Drawing.Font("Calibri", 13F);
+            this.dtpDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDataFinal.Location = new System.Drawing.Point(786, 21);
+            this.dtpDataFinal.Name = "dtpDataFinal";
+            this.dtpDataFinal.Size = new System.Drawing.Size(200, 34);
+            this.dtpDataFinal.TabIndex = 8;
+            this.dtpDataFinal.ValueChanged += new System.EventHandler(this.dtpDataFinal_ValueChanged);
             // 
             // label5
             // 
@@ -155,36 +162,37 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Médico";
             // 
-            // comboBox2
+            // cboMedico
             // 
-            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(1078, 21);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(262, 35);
-            this.comboBox2.TabIndex = 10;
+            this.cboMedico.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMedico.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboMedico.FormattingEnabled = true;
+            this.cboMedico.Location = new System.Drawing.Point(1078, 21);
+            this.cboMedico.Name = "cboMedico";
+            this.cboMedico.Size = new System.Drawing.Size(262, 35);
+            this.cboMedico.TabIndex = 10;
+            this.cboMedico.SelectedIndexChanged += new System.EventHandler(this.cboMedico_SelectedIndexChanged);
             // 
-            // dataGridView1
+            // dgvAgenda
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 15);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(15);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1530, 778);
-            this.dataGridView1.TabIndex = 1;
+            this.dgvAgenda.AllowUserToAddRows = false;
+            this.dgvAgenda.AllowUserToDeleteRows = false;
+            this.dgvAgenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAgenda.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvAgenda.Location = new System.Drawing.Point(15, 15);
+            this.dgvAgenda.Margin = new System.Windows.Forms.Padding(15);
+            this.dgvAgenda.Name = "dgvAgenda";
+            this.dgvAgenda.ReadOnly = true;
+            this.dgvAgenda.RowTemplate.Height = 24;
+            this.dgvAgenda.Size = new System.Drawing.Size(1530, 778);
+            this.dgvAgenda.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dgvAgenda, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 66);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -192,6 +200,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1560, 808);
             this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnLimpar.Font = new System.Drawing.Font("Calibri", 13F);
+            this.btnLimpar.Location = new System.Drawing.Point(1346, 18);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(186, 40);
+            this.btnLimpar.TabIndex = 11;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // FormAgenda
             // 
@@ -203,7 +223,7 @@
             this.Size = new System.Drawing.Size(1560, 874);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAgenda)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -214,14 +234,15 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboTipo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpDataInicial;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpDataFinal;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox cboMedico;
+        private System.Windows.Forms.DataGridView dgvAgenda;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnLimpar;
     }
 }

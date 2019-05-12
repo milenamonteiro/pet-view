@@ -38,14 +38,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboDono = new System.Windows.Forms.ComboBox();
+            this.cboTratamento = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.listView3 = new System.Windows.Forms.ListView();
+            this.rtxtObservacoes = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.rtxtDadosAnimal = new System.Windows.Forms.RichTextBox();
+            this.rtxtDadosDono = new System.Windows.Forms.RichTextBox();
+            this.rtxtDadosTratamento = new System.Windows.Forms.RichTextBox();
             this.flpBotoes.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -87,6 +87,7 @@
             this.btnCadastrar.TabIndex = 17;
             this.btnCadastrar.Text = "Finalizar tratamento";
             this.btnCadastrar.UseVisualStyleBackColor = true;
+            this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
             // btnCancelar
             // 
@@ -123,14 +124,14 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listView2, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox2, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cboDono, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cboTratamento, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.richTextBox3, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.listView3, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtObservacoes, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtDadosAnimal, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtDadosDono, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.rtxtDadosTratamento, 3, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 66);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -191,47 +192,29 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Dados do dono";
             // 
-            // listView2
+            // cboDono
             // 
-            this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.listView2.Location = new System.Drawing.Point(1048, 89);
-            this.listView2.Margin = new System.Windows.Forms.Padding(15);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(477, 194);
-            this.listView2.TabIndex = 6;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.cboDono.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboDono.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDono.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboDono.FormattingEnabled = true;
+            this.cboDono.Location = new System.Drawing.Point(1051, 29);
+            this.cboDono.Name = "cboDono";
+            this.cboDono.Size = new System.Drawing.Size(471, 35);
+            this.cboDono.TabIndex = 11;
+            this.cboDono.TextChanged += new System.EventHandler(this.cboDono_TextChanged);
             // 
-            // listView1
+            // cboTratamento
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.listView1.Location = new System.Drawing.Point(272, 89);
-            this.listView1.Margin = new System.Windows.Forms.Padding(15);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(511, 194);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(1051, 29);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(471, 35);
-            this.comboBox2.TabIndex = 11;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox1.Font = new System.Drawing.Font("Calibri", 13F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(281, 29);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(492, 35);
-            this.comboBox1.TabIndex = 4;
+            this.cboTratamento.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cboTratamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTratamento.Font = new System.Drawing.Font("Calibri", 13F);
+            this.cboTratamento.FormattingEnabled = true;
+            this.cboTratamento.Location = new System.Drawing.Point(281, 29);
+            this.cboTratamento.Name = "cboTratamento";
+            this.cboTratamento.Size = new System.Drawing.Size(492, 35);
+            this.cboTratamento.TabIndex = 4;
+            this.cboTratamento.SelectedValueChanged += new System.EventHandler(this.cboTratamento_SelectedValueChanged);
             // 
             // label6
             // 
@@ -245,28 +228,17 @@
             this.label6.TabIndex = 9;
             this.label6.Text = "Observações *";
             // 
-            // richTextBox3
+            // rtxtObservacoes
             // 
-            this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox3.Font = new System.Drawing.Font("Calibri", 13F);
-            this.richTextBox3.Location = new System.Drawing.Point(272, 313);
-            this.richTextBox3.Margin = new System.Windows.Forms.Padding(15);
-            this.richTextBox3.MaxLength = 300;
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(511, 175);
-            this.richTextBox3.TabIndex = 14;
-            this.richTextBox3.Text = "";
-            // 
-            // listView3
-            // 
-            this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView3.Font = new System.Drawing.Font("Calibri", 13F);
-            this.listView3.Location = new System.Drawing.Point(1048, 313);
-            this.listView3.Margin = new System.Windows.Forms.Padding(15);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(477, 175);
-            this.listView3.TabIndex = 17;
-            this.listView3.UseCompatibleStateImageBehavior = false;
+            this.rtxtObservacoes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtObservacoes.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtObservacoes.Location = new System.Drawing.Point(272, 313);
+            this.rtxtObservacoes.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtObservacoes.MaxLength = 300;
+            this.rtxtObservacoes.Name = "rtxtObservacoes";
+            this.rtxtObservacoes.Size = new System.Drawing.Size(511, 175);
+            this.rtxtObservacoes.TabIndex = 14;
+            this.rtxtObservacoes.Text = "";
             // 
             // label2
             // 
@@ -279,6 +251,42 @@
             this.label2.Size = new System.Drawing.Size(228, 27);
             this.label2.TabIndex = 18;
             this.label2.Text = "Dados do tratamento";
+            // 
+            // rtxtDadosAnimal
+            // 
+            this.rtxtDadosAnimal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDadosAnimal.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtDadosAnimal.Location = new System.Drawing.Point(272, 89);
+            this.rtxtDadosAnimal.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtDadosAnimal.Name = "rtxtDadosAnimal";
+            this.rtxtDadosAnimal.ReadOnly = true;
+            this.rtxtDadosAnimal.Size = new System.Drawing.Size(511, 194);
+            this.rtxtDadosAnimal.TabIndex = 22;
+            this.rtxtDadosAnimal.Text = "";
+            // 
+            // rtxtDadosDono
+            // 
+            this.rtxtDadosDono.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDadosDono.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtDadosDono.Location = new System.Drawing.Point(1048, 89);
+            this.rtxtDadosDono.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtDadosDono.Name = "rtxtDadosDono";
+            this.rtxtDadosDono.ReadOnly = true;
+            this.rtxtDadosDono.Size = new System.Drawing.Size(477, 194);
+            this.rtxtDadosDono.TabIndex = 23;
+            this.rtxtDadosDono.Text = "";
+            // 
+            // rtxtDadosTratamento
+            // 
+            this.rtxtDadosTratamento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtxtDadosTratamento.Font = new System.Drawing.Font("Calibri", 13F);
+            this.rtxtDadosTratamento.Location = new System.Drawing.Point(1048, 313);
+            this.rtxtDadosTratamento.Margin = new System.Windows.Forms.Padding(15);
+            this.rtxtDadosTratamento.Name = "rtxtDadosTratamento";
+            this.rtxtDadosTratamento.ReadOnly = true;
+            this.rtxtDadosTratamento.Size = new System.Drawing.Size(477, 175);
+            this.rtxtDadosTratamento.TabIndex = 24;
+            this.rtxtDadosTratamento.Text = "";
             // 
             // FormTratamento
             // 
@@ -308,13 +316,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboDono;
+        private System.Windows.Forms.ComboBox cboTratamento;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.ListView listView3;
+        private System.Windows.Forms.RichTextBox rtxtObservacoes;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox rtxtDadosAnimal;
+        private System.Windows.Forms.RichTextBox rtxtDadosDono;
+        private System.Windows.Forms.RichTextBox rtxtDadosTratamento;
     }
 }
