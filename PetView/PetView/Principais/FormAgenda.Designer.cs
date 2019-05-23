@@ -38,9 +38,9 @@
             this.dtpDataFinal = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.cboMedico = new System.Windows.Forms.ComboBox();
+            this.btnLimpar = new System.Windows.Forms.Button();
             this.dgvAgenda = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLimpar = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAgenda)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -101,7 +101,7 @@
             "Tratamento"});
             this.cboTipo.Location = new System.Drawing.Point(216, 21);
             this.cboTipo.Name = "cboTipo";
-            this.cboTipo.Size = new System.Drawing.Size(196, 35);
+            this.cboTipo.Size = new System.Drawing.Size(209, 35);
             this.cboTipo.TabIndex = 0;
             this.cboTipo.SelectedIndexChanged += new System.EventHandler(this.cboTipo_SelectedIndexChanged);
             // 
@@ -110,7 +110,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 13F);
-            this.label2.Location = new System.Drawing.Point(418, 25);
+            this.label2.Location = new System.Drawing.Point(431, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 27);
             this.label2.TabIndex = 2;
@@ -122,7 +122,7 @@
             this.dtpDataInicial.CustomFormat = "yyyy-MM-dd";
             this.dtpDataInicial.Font = new System.Drawing.Font("Calibri", 13F);
             this.dtpDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDataInicial.Location = new System.Drawing.Point(533, 21);
+            this.dtpDataInicial.Location = new System.Drawing.Point(546, 21);
             this.dtpDataInicial.Name = "dtpDataInicial";
             this.dtpDataInicial.Size = new System.Drawing.Size(200, 34);
             this.dtpDataInicial.TabIndex = 7;
@@ -133,7 +133,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 13F);
-            this.label3.Location = new System.Drawing.Point(739, 25);
+            this.label3.Location = new System.Drawing.Point(752, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 27);
             this.label3.TabIndex = 4;
@@ -145,7 +145,7 @@
             this.dtpDataFinal.CustomFormat = "yyyy-MM-dd";
             this.dtpDataFinal.Font = new System.Drawing.Font("Calibri", 13F);
             this.dtpDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDataFinal.Location = new System.Drawing.Point(786, 21);
+            this.dtpDataFinal.Location = new System.Drawing.Point(799, 21);
             this.dtpDataFinal.Name = "dtpDataFinal";
             this.dtpDataFinal.Size = new System.Drawing.Size(200, 34);
             this.dtpDataFinal.TabIndex = 8;
@@ -156,7 +156,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 13F);
-            this.label5.Location = new System.Drawing.Point(992, 25);
+            this.label5.Location = new System.Drawing.Point(1005, 25);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 27);
             this.label5.TabIndex = 9;
@@ -168,11 +168,23 @@
             this.cboMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMedico.Font = new System.Drawing.Font("Calibri", 13F);
             this.cboMedico.FormattingEnabled = true;
-            this.cboMedico.Location = new System.Drawing.Point(1078, 21);
+            this.cboMedico.Location = new System.Drawing.Point(1091, 21);
             this.cboMedico.Name = "cboMedico";
             this.cboMedico.Size = new System.Drawing.Size(262, 35);
             this.cboMedico.TabIndex = 10;
             this.cboMedico.SelectedIndexChanged += new System.EventHandler(this.cboMedico_SelectedIndexChanged);
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnLimpar.Font = new System.Drawing.Font("Calibri", 13F);
+            this.btnLimpar.Location = new System.Drawing.Point(1359, 18);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(166, 40);
+            this.btnLimpar.TabIndex = 11;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // dgvAgenda
             // 
@@ -200,18 +212,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1560, 808);
             this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // btnLimpar
-            // 
-            this.btnLimpar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnLimpar.Font = new System.Drawing.Font("Calibri", 13F);
-            this.btnLimpar.Location = new System.Drawing.Point(1346, 18);
-            this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(186, 40);
-            this.btnLimpar.TabIndex = 11;
-            this.btnLimpar.Text = "Limpar";
-            this.btnLimpar.UseVisualStyleBackColor = true;
-            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // FormAgenda
             // 

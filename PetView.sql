@@ -1029,7 +1029,7 @@ select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal],
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
 
-	where C.cod_medico = @cod_medico and C.data_consulta between @data_inicial and @data_final
+	where M.cod_medico = @cod_medico and C.data_consulta between @data_inicial and @data_final
 
 	union
 
@@ -1038,7 +1038,7 @@ select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal],
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
 	
-	where E.cod_medico = @cod_medico and E.data_exame between @data_inicial and @data_final
+	where M.cod_medico = @cod_medico and E.data_exame between @data_inicial and @data_final
 
 	union
 
@@ -1047,7 +1047,7 @@ select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal],
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
 
-	where T.cod_medico = @cod_medico and T.data_tratamento between @data_inicial and @data_final
+	where M.cod_medico = @cod_medico and T.data_tratamento between @data_inicial and @data_final
 end
 
 else if (@data_inicial is null and @data_final is null and @cod_medico is not null) begin
@@ -1058,7 +1058,7 @@ select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal],
 	inner join tbMedico M on M.cod_medico = C.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
 
-	where C.cod_medico = @cod_medico
+	where M.cod_medico = @cod_medico
 
 	union
 
@@ -1067,7 +1067,7 @@ select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal],
 	inner join tbMedico M on M.cod_medico = E.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
 	
-	where E.cod_medico = @cod_medico
+	where M.cod_medico = @cod_medico
 
 	union
 
@@ -1076,7 +1076,7 @@ select C.cod_consulta [ID], RTRIM(M.nome_med) [Médico], A.nome_animal [Animal],
 	inner join tbMedico M on M.cod_medico = T.cod_medico
 	inner join tbDono D on D.cod_dono = A.cod_dono
 
-	where T.cod_medico = @cod_medico
+	where M.cod_medico = @cod_medico
 end
 
 else begin
@@ -1159,7 +1159,7 @@ GO
 
 -- INSERTS DE TESTE
 
-exec sp_insert_func '12345678', 22, 'Rua rua', 'Bairro bairro', null, 'Cidade cidade', 'UF', 'Jorje', '12345678901', '123456789', '11986376726', '27362651', 'aaa', 'func', 1111
+exec sp_insert_func '12345678', 22, 'Rua rua', 'Bairro bairro', null, 'Cidade cidade', 'UF', 'Jorge', '12345678901', '123456789', '11986376726', '27362651', 'aaa', 'func', 1111
 GO
 
 exec sp_insert_usuario 'nome', 'senha', 1
@@ -1177,5 +1177,5 @@ GO
 update tbUsuario set ativacao_usuario = 0 where cod_usuario = 2
 GO
 
-exec sp_insert_dono 07856999, 23, 'a', 's', 'a', 'a', 'aa', 'Danoninho 1', '73466377722', '564738372', '222222', '32222', 'sssssssssss'
+exec sp_insert_dono 07856999, 23, 'a', 's', 'a', 'a', 'aa', 'Patrício', '73466377722', '564738372', '222222', '32222', 'sssssssssss'
 GO

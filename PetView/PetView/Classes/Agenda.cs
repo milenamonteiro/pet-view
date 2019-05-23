@@ -30,6 +30,12 @@ namespace PetView
                     cmd.SelectCommand.Parameters.Add("@data_final", SqlDbType.DateTime).Value = SqlString.Null;
                 }
 
+                else if (!string.IsNullOrWhiteSpace(datainicial) && !string.IsNullOrWhiteSpace(datafinal))
+                {
+                    cmd.SelectCommand.Parameters.Add("@data_inicial", SqlDbType.DateTime).Value = datainicial;
+                    cmd.SelectCommand.Parameters.Add("@data_final", SqlDbType.DateTime).Value = datafinal;
+                }
+
                 else if (medico == null)
                     cmd.SelectCommand.Parameters.Add("@cod_medico", SqlDbType.Int).Value = SqlString.Null;
 

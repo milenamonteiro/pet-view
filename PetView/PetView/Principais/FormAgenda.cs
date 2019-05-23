@@ -53,9 +53,10 @@ namespace PetView
         private void dgvParametros(String coluna, String valor)
         {
             if (datainicial != "" && datafinal != "" || medico != null)
-            {
                 dgvAgenda.DataSource = Agenda.Select(datainicial, datafinal, medico);
-            }
+            else if (datainicial != "" && datafinal != "")
+                dgvAgenda.DataSource = Agenda.Select(datainicial, datafinal, medico);
+
             switch (coluna)
             {
                 case "Consulta":
