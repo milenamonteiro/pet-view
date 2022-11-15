@@ -9,7 +9,7 @@ O Pet View é um sistema desktop gestor de uma clínica veterinária, suas princ
 ## Imagens
 [Acesse o protótipo interativo](https://www.figma.com/file/hoUmF3Gz1OvvO2LHA5db3q/Pet-View?node-id=0%3A1&t=wnHRSX8KHgQlYRfU-1)
 
-<details>
+<details open>
 <summary><b>Mostrar imagens</b></summary><br/>
 
 <details open>
